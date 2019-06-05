@@ -1,17 +1,13 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
-export default class ProductListPage extends Component {
-  render() {
-    return (
-    
-      <div style={{ paddingLeft: "25%", paddingTop: "5%" }}>
-        <div className="col-lg-10" >
-          <Link to="/products/add" className="btn btn-info mb-10">
-            Thêm sản phẩm
-          </Link>
+import React, { Component } from "react";
+
+class ViewFeedback extends Component {
+    render() {
+        return (
+            <div style={{paddingLeft: "25%",paddingTop:"5%"}}>
+            <div className="col-lg-10" >
           <div className="card">
             <div className="card-header">
-              <i className="fa fa-align-justify" /> Product Table</div>
+              <i className="fa fa-align-justify" /> Feedback Table</div>
             <div className="card-body">
               <table className="table table-responsive-sm table-striped">
                 <thead>
@@ -118,8 +114,9 @@ export default class ProductListPage extends Component {
             </div>
           </div>
         </div>
-      </div>
-    
-    )
-  }
+        </div>
+      
+        );
+    }
 }
+export default ViewFeedback; 

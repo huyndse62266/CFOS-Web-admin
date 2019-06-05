@@ -1,10 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import ProductListPage from './pages/CreateForm';
+
+import Dashboard from './pages/Dashboard/Dashboard';
 function App() {
   return (
-    <ProductListPage/>
+    <Dashboard/>
   );
 }
 

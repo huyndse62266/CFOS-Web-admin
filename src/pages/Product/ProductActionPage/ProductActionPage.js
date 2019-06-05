@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
-export default class CreateForm extends Component {
+export default class ProductActionPage extends Component {
   render() {
     return (
-      <div className="content col-md-5">
+      <div className="content col-md-8" style={{ paddingLeft: "25%", paddingTop: "5%" }}>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-8">
@@ -14,12 +14,12 @@ export default class CreateForm extends Component {
                 </div>
                 <div className="card-body">
                   <form>
-                    
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
                           <label className="bmd-label-floating">Food Type</label>
-                            <select className="form-control" id="exampleFormControlSelect1">
+                            <select className="form-control" data-show-content="true"  >
+                            <option>Select...</option>
                             <option>Món Lẩu</option>
                             <option>Món Cơm</option>
                             <option>Món Nước</option>
@@ -31,7 +31,8 @@ export default class CreateForm extends Component {
                       <div className="col-md-6">
                         <div className="form-group">
                           <label className="bmd-label-floating">Menu</label>
-                            <select className="form-control" id="exampleFormControlSelect1">
+                            <select className="form-control">
+                            <option>Select...</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -48,26 +49,44 @@ export default class CreateForm extends Component {
                           <input type="text" className="form-control" />
                         </div>
                       </div>                   
-                    </div>              
+                    </div>     
+                    <div className="row">
+                    <div className="col-md-6">
+                          <div className="form-group">
+                              <label className="bmd-label-floating">Price</label>
+                              <input type="number" className="form-control" />
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                          <div className="form-group">
+                              <label className="bmd-label-floating">Quantity</label>
+                              <input type="number" className="form-control" />
+                        </div>
+                      </div>
+                    </div>  
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="form-group">
+                          <label>Description</label>
+                          <div className="form-group">                          
+                            <textarea className="form-control" rows={3} defaultValue={""} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>       
                     <div className="row">
                       <div className="col-md-6">
                           <div className="form-group">
-                            <label className="bmd-label-floating">Active</label>
+                            <label className="bmd-label-floating">Status</label>
                             <div classname="form-check">
-                              <input classname="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" defaultvalue="option1" defaultchecked />
+                              <input classname="form-check-input" type="checkbox" />
                               <label classname="form-check-label" htmlfor="exampleRadios1">
                                 True
                               </label>                       
                             </div>
                         </div>
-                      </div>
-                      <div className="col-md-6">
-                          <div className="form-group">
-                              <label className="bmd-label-floating">Price</label>
-                              <input type="text" className="form-control" />
-                        </div>
-                      </div>
-                    </div>
+                      </div>          
+                    </div>             
                     <div className="row">
                       <div className="col-md-12">
                           <br/>
@@ -75,28 +94,17 @@ export default class CreateForm extends Component {
                             <input type="file" />
                       </div>
                     </div>
-                    <br/>
-                    <div className="row">
-                      <div className="col-md-12">
-                        <div className="form-group">
-                          <label>Description</label>
-                          <div className="form-group">                          
-                            <textarea className="form-control" rows={5} defaultValue={""} />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <br/>             
                     <button type="submit" className="btn btn-primary pull-right">Create</button>
+                    <button type="submit" className="btn btn-primary pull-right">Back</button>
                     <div className="clearfix" />
                   </form>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
-      </div>
-      
+      </div>    
     );
   }
 }
