@@ -6,10 +6,11 @@ import ViewFeedback from './../../pages/Feedback/ViewFeedback';
 import ViewInformationStore from './../../pages/Store/StorePage/ViewInformationStore';
 import MenuListPage from './../../pages/Menu/MenuListPage/MenuListPage';
 import ProductActionPage from './../../pages/Product/ProductActionPage/ProductActionPage';
+import directURL from "../directURL";
 class MenuProduct extends Component {
     render() {
         return (
-            <Router>
+            <div>
                 <div className="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
                     <div className="logo">
                         <Link to="/">
@@ -60,14 +61,16 @@ class MenuProduct extends Component {
                     </div>
                 </div>
                 <div>
-                    <Route exact path="/" component={ViewStatic} />
+                    {/* <Route exact path="/" component={ViewStatic} />
                     <Route path="/products" component={ProductListPage} />
                     <Route path="/viewFeedback" component={ViewFeedback} />
                     <Route path="/viewInformationStore" component={ViewInformationStore} />
                     <Route path="/menuListPage" component={MenuListPage} />
-                    <Route path="/products/add" component={ProductActionPage} />
+                    <Route path="/products/add" component={ProductActionPage} /> */}
+
                 </div>
-            </Router>
+            </div>
+
         );
     }
 }

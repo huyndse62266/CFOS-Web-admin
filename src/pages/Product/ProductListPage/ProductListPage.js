@@ -6,7 +6,7 @@ export default class ProductListPage extends Component {
     
       <div style={{ paddingLeft: "25%", paddingTop: "5%" }}>
         <div className="col-lg-10" >
-          <Link to="/products/add" className="btn btn-info mb-10">
+          <Link to="/add" className="btn btn-info mb-10">
             Thêm sản phẩm
           </Link>
           <div className="card">
