@@ -3,15 +3,22 @@ import { Link } from 'react-router-dom';
 export default class ProductListPage extends Component {
   render() {
     return (
-    
-      <div style={{ paddingLeft: "25%", paddingTop: "5%" }}>
+
+      <div style={{ paddingLeft: "20%", paddingTop: "5%" }}>
         <div className="col-lg-10" >
           <Link to="/add" className="btn btn-info mb-10">
             Thêm sản phẩm
           </Link>
           <div className="card">
-            <div className="card-header">
-              <i className="fa fa-align-justify" /> Product Table</div>
+            <div className="input-group card-header col-md-4" >   
+              <input type="text" className="form-control" placeholder="Search..." />
+              <span className="input-group-btn">
+                <button className="btn btn-default" type="button">
+                <i className="material-icons">search</i>
+                </button>
+              </span>
+            </div>
+            
             <div className="card-body">
               <table className="table table-responsive-sm table-striped">
                 <thead>
@@ -119,7 +126,7 @@ export default class ProductListPage extends Component {
           </div>
         </div>
       </div>
-    
+
     )
   }
 }

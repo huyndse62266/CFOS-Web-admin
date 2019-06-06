@@ -4295,7 +4295,7 @@ tbody.collapse.show {
   .navbar-expand-md>.container,
   .navbar-expand-md>.container-fluid {
     padding-right: 0;
-    padding-left: 0;
+    padding-left: 95%;
   }
 }
 

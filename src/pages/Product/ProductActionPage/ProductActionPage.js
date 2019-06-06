@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class ProductActionPage extends Component {
   render() {
     return (
-      <div className="content col-md-8" style={{ paddingLeft: "25%", paddingTop: "5%" }}>
+      <div className="content col-md-12" style={{ paddingLeft: "20%", paddingTop: "5%" }}>
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-8">
@@ -17,8 +17,8 @@ export default class ProductActionPage extends Component {
                     <div className="row">
                       <div className="col-md-6">
                         <div className="form-group">
-                          <label className="bmd-label-floating">Food Type</label>
-                            <select className="form-control" data-show-content="true"  >
+                          <label className="exampleFormControlSelect1">Food Type</label>
+                          <select className="form-control selectpicker" data-style="btn btn-link" id="exampleFormControlSelect1">
                             <option>Select...</option>
                             <option>Món Lẩu</option>
                             <option>Món Cơm</option>
