@@ -4,7 +4,7 @@ class MemberListPage extends Component {
     render() {
         return (
             <div style={{ paddingLeft: "20%", paddingTop: "5%" }}>
-                <div className="col-lg-10" >
+                <div className="col-lg-12" >
                     <div className="card">
                         <div className="card-header">
                             <i className="fa fa-align-justify" /> Member Table</div>

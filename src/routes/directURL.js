@@ -12,6 +12,7 @@ import CategoriesListPage from "../pages/Categories/CategoriesListPage/Categorie
 import MemberListPage from "../pages/Member/MemberListPage/MemberListPage";
 import TransactionListPage from "../pages/Transaction/TransactionListPage/TransactionListPage";
 import CancelOderPage from "../pages/CancelOrder/CancelOderPage/CancelOderPage";
+
 class directURL extends Component {
     render() {
         return (
@@ -28,6 +29,8 @@ class directURL extends Component {
                 <Route path="/memberListPage" component={MemberListPage} />;
                 <Route path="/transactionListPage" component={TransactionListPage} />;
                 <Route path="/cancelOrderPage" component={CancelOderPage} />;
+                <Route path="/cancelOrderPage" component={CancelOderPage} />;
+            
             </div>
 
         );

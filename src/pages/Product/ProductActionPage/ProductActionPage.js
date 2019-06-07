@@ -3,10 +3,10 @@ import React, { Component } from "react";
 export default class ProductActionPage extends Component {
   render() {
     return (
-      <div className="content col-md-12" style={{ paddingLeft: "20%", paddingTop: "5%" }}>
+      <div className="content col-md-20" style={{ paddingLeft: "20%", paddingTop: "5%" }}>
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-8">
+            <div className="col-md-12">
               <div className="card">
                 <div className="card-header card-header-primary">
                   <h4 className="card-title">Create new food</h4>
@@ -31,7 +31,7 @@ export default class ProductActionPage extends Component {
                       <div className="col-md-6">
                         <div className="form-group">
                           <label className="bmd-label-floating">Menu</label>
-                            <select className="form-control">
+                          <select className="form-control">
                             <option>Select...</option>
                             <option>1</option>
                             <option>2</option>
@@ -48,62 +48,61 @@ export default class ProductActionPage extends Component {
                           <label className="bmd-label-floating">Food Name</label>
                           <input type="text" className="form-control" />
                         </div>
-                      </div>                   
-                    </div>     
+                      </div>
+                    </div>
                     <div className="row">
-                    <div className="col-md-6">
-                          <div className="form-group">
-                              <label className="bmd-label-floating">Price</label>
-                              <input type="number" className="form-control" />
+                      <div className="col-md-6">
+                        <div className="form-group">
+                          <label className="bmd-label-floating">Price</label>
+                          <input type="number" className="form-control" />
                         </div>
                       </div>
                       <div className="col-md-6">
-                          <div className="form-group">
-                              <label className="bmd-label-floating">Quantity</label>
-                              <input type="number" className="form-control" />
+                        <div className="form-group">
+                          <label className="bmd-label-floating">Quantity</label>
+                          <input type="number" className="form-control" />
                         </div>
                       </div>
-                    </div>  
+                    </div>
                     <div className="row">
                       <div className="col-md-12">
                         <div className="form-group">
                           <label>Description</label>
-                          <div className="form-group">                          
+                          <div className="form-group">
                             <textarea className="form-control" rows={3} defaultValue={""} />
                           </div>
                         </div>
                       </div>
-                    </div>       
+                    </div>
                     <div className="row">
                       <div className="col-md-6">
-                          <div className="form-group">
-                            <label className="bmd-label-floating">Status</label>
-                            <div classname="form-check">
-                              <input classname="form-check-input" type="checkbox" />
-                              <label classname="form-check-label" htmlfor="exampleRadios1">
-                                True
-                              </label>                       
-                            </div>
+                        <div className="form-group">
+                          <label className="bmd-label-floating">Status</label>
+                          <div classname="form-check">
+                            <input classname="form-check-input" type="checkbox" />
+                            <label classname="form-check-label" htmlfor="exampleRadios1">
+                              True
+                              </label>
+                          </div>
                         </div>
-                      </div>          
-                    </div>             
-                    <div className="row">
-                    <div class="fileinput fileinput-new text-center" data-provides="fileinput">
-    <div class="fileinput-new thumbnail img-raised">
-        <img src="http://style.anu.edu.au/_anu/4/images/placeholders/person_8x10.png" alt="..."/>>
-    </div>
-    <div class="fileinput-preview fileinput-exists thumbnail img-raised"></div>
-    <div>
-        <span class="btn btn-raised btn-round btn-default btn-file">
-            <span class="fileinput-new">Select image</span>
-            <span class="fileinput-exists">Change</span>
-            <input type="file" name="..." />
-        </span>
-        <a href="#pablo" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
-    </div>
-</div>
+                      </div>
                     </div>
-                    <br/>             
+                    <div className="row my-auto">
+                      <div className="fileinput fileinput-new text-center col-lg-12" data-provides="fileinput">
+                        <div className="fileinput-preview fileinput-exists thumbnail " style={{height:'300px'}}>
+                          <img className="img-responsive" src="http://www.djpk.kemenkeu.go.id/wp-content/uploads/2019/05/No-Image-Available.jpg" alt="..." style={{height:'100%'}}/>
+                        </div>
+                        <div>
+                        <span className="btn btn-raised btn-round btn-file btn-sm">
+
+                          <input type="file" name="..." />
+                        </span>
+                              <a href="#pablo" className="btn btn-danger btn-round fileinput-exists btn-sm" data-dismiss="fileinput">
+                              <i className="fa fa-times"></i> Remove</a>
+                        </div>
+                      </div>
+                    </div>
+                    <br />
                     <button type="submit" className="btn btn-primary pull-right">Create</button>
                     <button type="submit" className="btn btn-primary pull-right">Back</button>
                     <div className="clearfix" />
@@ -113,7 +112,7 @@ export default class ProductActionPage extends Component {
             </div>
           </div>
         </div>
-      </div>    
+      </div>
     );
   }
 }

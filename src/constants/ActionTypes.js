@@ -1,0 +1,1 @@
+export const FETCH_PRODUCTS = 'FETCH_PRODUCTS'; // Vi du nhu get all Product
