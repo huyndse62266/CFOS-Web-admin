@@ -6,9 +6,9 @@ class Header extends Component {
         return (
             <div className="main-panel">
               
-                <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-                    <div className="container-fluid">                     
-                        <div className="collapse navbar-collapse justify-content-end">
+                <nav className="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top  p-0">
+                    <div className="container-fluid" style={{backgroundColor:'#343A40', color:'white'}}>                     
+                        <div className="collapse navbar-collapse justify-content-end h-100" >
                             <ul className="navbar-nav">
                                 <li className="nav-item dropdown">
                                     <a className="nav-link" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
