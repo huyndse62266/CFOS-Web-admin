@@ -1,7 +1,75 @@
 import React, { Component } from "react";
-import logo from '../images/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg';
+import jwt_decode from 'jwt-decode';
+import axios from "axios";
+// import logo from '../images/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg';
 export default class LoginForm extends Component {
+  constructor(props){
+    super(props);
+      this.state = {
+        Username: '',
+        Password: '',
+        Role: '',
+        isManager: false,
+        token: ''
+      }
+      this.handleEmailChange = this.handleEmailChange.bind(this);
+      this.handlePasswordChange = this.handlePasswordChange.bind(this);
+      this.login = this.login.bind(this);
+  }
+
+
+
+  handleEmailChange(e){
+    this.setState({Username: e.target.value})
+}
+
+  handlePasswordChange(e){
+    this.setState({Password: e.target.value})
+  }
+ 
+
+
+  
+ decode(token){
+    var decoded = jwt_decode(token);
+    var username = decoded.auth;
+    this.setState({
+      Role: decoded.sub
+    })
+    console.log(decoded);
+ }
+
+
+
+login(){
+  const user = {
+    username: this.state.Username,
+    password: this.state.Password
+  }
+  console.log("user")
+  console.log(user)
+  axios.post('http://8437d74a.ngrok.io/api/authenticate', user )
+  .then( res =>{
+    this.setState({
+      token: res.id_token
+    })
+    this.decode(res.data.id_token)
+  })
+}
+
+  isManager = () =>{
+    if(this.state.Role === "Manager"){
+      return true;
+    }
+    return false;
+  }
+
+  signIn(){
+    alert('Email address is ' + this.state.Username + ' Password is ' + this.state.Password);            
+  }
+
   render() {
+
     return (
         <div className="container">
         {/* Outer Row */}
@@ -12,7 +80,7 @@ export default class LoginForm extends Component {
                 {/* Nested Row within Card Body */}
                 <div className="row">
                   <div className="col-lg-6 d-none d-lg-block bg-login-image" >
-                        <img src={logo} className="login-logo" width={"100%"} height={"100%"}/>
+                        {/* <img src={logo} className="login-logo" width={"100%"} height={"100%"}/> */}
                    </div>   
                   <div className="col-lg-6">
                     <div className="p-5">
@@ -21,10 +89,10 @@ export default class LoginForm extends Component {
                       </div>
                       <form className="user">
                         <div className="form-group">
-                          <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." />
+                          <input type="text" className="form-control form-control-user"  name="Username" onChange={this.handleEmailChange} placeholder="Enter Username" />
                         </div>
                         <div className="form-group">
-                          <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password" />
+                          <input type="password" className="form-control form-control-user" name="Password"   onChange={this.handlePasswordChange} placeholder="Password" />
                         </div>
                         <div className="form-group">
                           <div className="custom-control custom-checkbox small">
@@ -32,9 +100,8 @@ export default class LoginForm extends Component {
                             <label className="custom-control-label" htmlFor="customCheck">Remember Me</label>
                           </div>
                         </div>
-                        <a href="index.html" className="btn btn-primary btn-user btn-block">
-                          Login
-                        </a>              
+                        <button className="btn btn-lg btn-primary btn-block" onClick={this.login} type="button">Sign in</button>
+             
                       </form>
                       <hr />
                       <div className="text-center">
