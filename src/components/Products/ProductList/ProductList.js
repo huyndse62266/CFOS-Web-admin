@@ -23,21 +23,24 @@ class ProductList extends Component {
                                 <th>STT</th>
                                 <th>Tên</th>
                                 <th>Ảnh</th>
-                                <th>Loại Thức Ăn</th>
+                                <th>Đơn vị thức ăn</th>
                                 <th>Giá</th>
                                 <th>Mô tả</th>
                                 <th>Số lượng</th>
-                                <th>Category</th>
+                                <th>Category store</th>
+                                <th>Category food court</th>
                                 <th>Trạng thái</th>
                                 <th>Hành Động</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {/* <ProductItems />
                             <ProductItems />
                             <ProductItems />
                             <ProductItems />
-                            <ProductItems />
-                             <ProductItems />
+                            <ProductItems /> */}
+                            {/* Gọi ProductItem thông qua thèn Product truyền qua các props children */}
+                            {this.props.children}
                         </tbody>
                     </table>
                     <ul className="pagination">
