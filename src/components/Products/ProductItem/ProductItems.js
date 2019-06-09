@@ -6,32 +6,21 @@ class ProductItems extends Component {
         // Gọi thèn props ra và đặt các tên biến
         var { product, index } = this.props;
         var statusName = product.status ? 'Sẵn Sàng' : 'Hết Món';
-        var statusClass = product.status ? 'warning' : 'default'
+        var statusClass = product.status ? 'success' : 'warning'
         return (
             <tr>
-                {/* <td>{index + 1}</td>
-                <td>{product.name}</td>
-                <td>{product.image}</td>
-                <td>{product.type}</td>
+                <td>{index + 1}</td>
+                <td>{product.foodName}</td>
+                <td>{product.foodImage}</td>
+                <td>{product.foodUnit}</td>
                 <td>{product.price}</td>
-                <td>{product.description}</td>
+                <td>{product.foodDescription}</td>             
                 <td>{product.quantity}</td>
                 <td>
-                    <span className={`label label-${statusClass}`}>
+                    <span className={`btn btn-${statusClass} btn-sm` }>
                         {statusName}
                     </span>
-                </td> */}
-                <td>Yiorgos Avraamu</td>
-                <td>2012/01/01</td>
-                <td>Member</td>
-                <td>Member</td>
-                <td>Member</td>
-                <td>Member</td>
-                <td>Member</td>
-                <td>Member</td>
-                <td>
-                    <span className="badge badge-success">Active</span>
-                </td>
+                </td>                
                 <td className="td-actions ">
                     <button type="button" rel="tooltip" className="btn btn-success" style={{ marginRight: "10px" }}>
                         <i className="material-icons">edit</i>

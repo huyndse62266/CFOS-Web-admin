@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 class MenuList extends Component {
     render() {
+        const {pathname} = this.props.location;
+        const isLogin = pathname === '/login';
         return (
             <div>
                 <div className="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
@@ -90,4 +92,4 @@ class MenuList extends Component {
         );
     }
 }
-export default MenuList;
+export default withRouter(MenuList);

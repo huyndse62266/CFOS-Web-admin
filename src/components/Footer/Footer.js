@@ -8,13 +8,13 @@ export default class Footer extends Component {
                     <div className="container-fluid">
                         <div className="row">
                             <div className="col-lg-6">
-                                <div class="float-left">
+                                <div className="float-left">
                                     <h4>A CAPSTONE PROJECT AT <img className="px-3" src="https://daihoc.fpt.edu.vn/media/2016/12/Logo-FU-01.png" alt="..."/></h4>
                                     
                                 </div>
                             </div>
                             <div className=" d-flex justify-content-end align-items-center col-lg-6">
-                                <div class="float-right">
+                                <div className="float-right">
                                     <h5>© 2019 Copyright by <a className="text-info">CFOS Team</a></h5>
                                     
                                 </div>

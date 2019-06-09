@@ -16,9 +16,17 @@ export const actFetchProductsRequest = () => {
     }
 }
 // Lưu products lên store
-export const actFetchProducts = (products) => {
+export const actFetchProducts = products => {
     return {
         type: Types.FETCH_PRODUCTS,
         products
+    }
+}
+
+export const actFetchRole = role => {
+    console.log('roles action')
+    return {
+        type: Types.FETCH_ROLE,
+        payload: role
     }
 }

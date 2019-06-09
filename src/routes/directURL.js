@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route } from 'react-router-dom';
+import {Route, Switch } from 'react-router-dom';
 import ViewStaticOrder from "../pages/Order/ViewStatic/ViewStaticOrder";
 import ProductListPage from "../pages/Product/ProductListPage/ProductListPage";
 import ViewFeedback from "../pages/Feedback/ViewFeedback";
@@ -12,12 +12,16 @@ import CategoriesListPage from "../pages/Categories/CategoriesListPage/Categorie
 import MemberListPage from "../pages/Member/MemberListPage/MemberListPage";
 import TransactionListPage from "../pages/Transaction/TransactionListPage/TransactionListPage";
 import CancelOderPage from "../pages/CancelOrder/CancelOderPage/CancelOderPage";
+import LoginForm from "../pages/LoginPage/LoginForm";
+
 
 class directURL extends Component {
     render() {
         return (
             <div>
+            <Switch>
                 <Route exact path="/" component={ViewStaticOrder} />
+                <Route exact path="/login" component={LoginForm}/>
                 <Route exact path="/products" component={ProductListPage} />
                 <Route exact path="/add" component={ProductActionPage} />
                 <Route path="/viewFeedback" component={ViewFeedback} />
@@ -29,10 +33,9 @@ class directURL extends Component {
                 <Route path="/memberListPage" component={MemberListPage} />;
                 <Route path="/transactionListPage" component={TransactionListPage} />;
                 <Route path="/cancelOrderPage" component={CancelOderPage} />;
-                <Route path="/cancelOrderPage" component={CancelOderPage} />;
-            
+                <Route path="/cancelOrderPage" component={CancelOderPage} />;           
+            </Switch>
             </div>
-
         );
     }
 }

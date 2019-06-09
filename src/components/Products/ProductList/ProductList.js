@@ -27,18 +27,12 @@ class ProductList extends Component {
                                 <th>Giá</th>
                                 <th>Mô tả</th>
                                 <th>Số lượng</th>
-                                <th>Category store</th>
-                                <th>Category food court</th>
                                 <th>Trạng thái</th>
                                 <th>Hành Động</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* <ProductItems />
-                            <ProductItems />
-                            <ProductItems />
-                            <ProductItems />
-                            <ProductItems /> */}
+                          
                             {/* Gọi ProductItem thông qua thèn Product truyền qua các props children */}
                             {this.props.children}
                         </tbody>

@@ -1,77 +1,89 @@
 import React, { Component } from "react";
+import {actFetchRole} from '../../actions/action';
 import jwt_decode from 'jwt-decode';
+import {connect} from 'react-redux';
 import axios from "axios";
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 // import logo from '../images/mgm-grand-restaurants-food-court-architecture-exterior-01.jpg';
-export default class LoginForm extends Component {
-  constructor(props){
+class LoginForm extends Component {
+  constructor(props) {
     super(props);
-      this.state = {
-        Username: '',
-        Password: '',
-        Role: '',
-        isManager: false,
-        token: ''
-      }
-      this.handleEmailChange = this.handleEmailChange.bind(this);
-      this.handlePasswordChange = this.handlePasswordChange.bind(this);
-      this.login = this.login.bind(this);
+    this.state = {
+      Username: '',
+      Password: '',
+      Role: '',
+      isManager: false,
+      token: ''
+    }
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.login = this.login.bind(this);
   }
 
 
 
-  handleEmailChange(e){
-    this.setState({Username: e.target.value})
-}
-
-  handlePasswordChange(e){
-    this.setState({Password: e.target.value})
+  handleEmailChange(e) {
+    this.setState({ Username: e.target.value })
   }
- 
+
+  handlePasswordChange(e) {
+    this.setState({ Password: e.target.value })
+  }
 
 
-  
- decode(token){
+
+
+  decode(token) {
     var decoded = jwt_decode(token);
     var username = decoded.auth;
     this.setState({
       Role: decoded.sub
     })
     console.log(decoded);
- }
-
-
-
-login(){
-  const user = {
-    username: this.state.Username,
-    password: this.state.Password
   }
-  console.log("user")
-  console.log(user)
-  axios.post('http://8437d74a.ngrok.io/api/authenticate', user )
-  .then( res =>{
-    this.setState({
-      token: res.id_token
-    })
-    this.decode(res.data.id_token)
-  })
-}
 
-  isManager = () =>{
-    if(this.state.Role === "Manager"){
+
+
+  login() {
+    // const user = {
+    //   username: this.state.Username,
+    //   password: this.state.Password
+    // }
+    // console.log("user")
+    // console.log(user)
+    // axios.post('http://8437d74a.ngrok.io/api/authenticate', user)
+    //   .then(res => {
+    //     // this.setState({
+    //     //   token: res.id_token
+    //     // })
+    //     document.cookie = 'token=abc';
+    //     window.location.href = "/";
+    //     this.decode(res.data.id_token)
+    //   })
+
+    // document.cookie = 'token=abc';
+    this.props.actFetchRole('admin')
+        window.location.href = "/dashboard";
+        
+  }
+
+  isManager = () => {
+    if (this.state.Role === "Manager") {
       return true;
     }
     return false;
   }
 
-  signIn(){
-    alert('Email address is ' + this.state.Username + ' Password is ' + this.state.Password);            
+  signIn() {
+    alert('Email address is ' + this.state.Username + ' Password is ' + this.state.Password);
   }
 
   render() {
-
+    // const { getFieldDecorator } = this.props.form;
+    const {roles} = this.props;
+    console.log('test', roles)
     return (
-        <div className="container">
+      <div className="container">
         {/* Outer Row */}
         <div className="row justify-content-center">
           <div className="col-xl-10 col-lg-12 col-md-9">
@@ -80,14 +92,14 @@ login(){
                 {/* Nested Row within Card Body */}
                 <div className="row">
                   <div className="col-lg-6 d-none d-lg-block bg-login-image" >
-                        {/* <img src={logo} className="login-logo" width={"100%"} height={"100%"}/> */}
-                   </div>   
+                    {/* <img src={logo} className="login-logo" width={"100%"} height={"100%"}/> */}
+                  </div>
                   <div className="col-lg-6">
                     <div className="p-5">
                       <div className="text-center">
                         <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                       </div>
-                      <form className="user">
+                      <form className="user" >
                         <div className="form-group">
                           <input type="text" className="form-control form-control-user"  name="Username" onChange={this.handleEmailChange} placeholder="Enter Username" />
                         </div>
@@ -104,6 +116,42 @@ login(){
              
                       </form>
                       <hr />
+                      {/* <Form onSubmit={this.handleSubmit} className="login-form">
+                        <Form.Item>
+                          {getFieldDecorator('username', {
+                            rules: [{ required: true, message: 'Please input your username!' }],
+                          })(
+                            <Input
+                              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                              placeholder="Username"
+                            />,
+                          )}
+                        </Form.Item>
+                        <Form.Item>
+                          {getFieldDecorator('password', {
+                            rules: [{ required: true, message: 'Please input your Password!' }],
+                          })(
+                            <Input
+                              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                              type="password"
+                              placeholder="Password"
+                            />,
+                          )}
+                        </Form.Item>
+                        <Form.Item>
+                          {getFieldDecorator('remember', {
+                            valuePropName: 'checked',
+                            initialValue: true,
+                          })(<Checkbox>Remember me</Checkbox>)}
+                          <a className="login-form-forgot" href="">
+                            Forgot password
+          </a>
+                          <Button type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                         </Button>
+                          Or <a href="">register now!</a>
+                        </Form.Item>
+                      </Form> */}
                       <div className="text-center">
                         <a className="small" href="forgot-password.html">Forgot Password?</a>
                       </div>
@@ -118,3 +166,11 @@ login(){
     );
   }
 }
+export default connect(
+  state => ({
+    roles: state.system.roles
+  }),
+  {
+    actFetchRole
+  }
+)(LoginForm);

@@ -1,24 +1,23 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router} from 'react-router-dom';
+import { connect } from 'react-redux';
 import MenuList from './../../components/Menu/MenuList';
 import Direct from './../../routes/directURL';
 import Header from './../../components/Header/Header';
 import Footer from './../../components/Footer/Footer'
-export default class Dashboard extends Component {
+ class Dashboard extends Component {
     render() {
+        console.log('aaa:', this.props.roles)
         return (
-            // Start sidebar
-            <Router>
-                <div className="wrapper">
-                    <Header/>
-                    <MenuList/>
-                    <div>
-                        <Direct />
-                    </div>
-                    <Footer/>
-                </div>
-            </Router>
-            //   End slidebar
+            <p> abc</p>
         )
     }
 }
+export default connect(
+    state => ({
+      roles: state.system.roles
+    }),
+    {
+      //action
+    }
+  )(Dashboard);
