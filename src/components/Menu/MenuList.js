@@ -1,95 +1,131 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { RouteMap } from '../../utils/constants';
+import { ROLES } from '../../utils/constants/constants'
 
 class MenuList extends Component {
-    render() {
-        const {pathname} = this.props.location;
-        const isLogin = pathname === '/login';
-        return (
-            <div>
-                <div className="sidebar" data-color="purple" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
-                    <div className="logo">
-                        <Link to="/">
-                            <div className="simple-text logo-normal">
-                                CFOS
-                            </div>
-                        </Link>
-                    </div>
-                    <div className="sidebar-wrapper">
-                        <ul className="nav">
-                            <li className="nav-item active  ">
-                                <Link className="nav-link" to="/">
-                                    <i className="material-icons">dashboard</i>
-                                    <p>View Static</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item ">
-                                <Link className="nav-link" to="/staff">
-                                    <i className="material-icons">person</i>
-                                    <p>Management Staff</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item ">
-                                <Link className="nav-link" to="/memberListPage">
-                                    <i className="material-icons">how_to_reg</i>
-                                    <p>Management Member</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item ">
-                                <Link className="nav-link" to="/products" >
-                                    <i className="material-icons">fastfood</i>
-                                    <p>Management Food</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item ">
-                                <Link className="nav-link" to="/menuListPage" >
-                                    <i className="material-icons">content_paste</i>
-                                    <p>Management Menu</p>
-                                </Link>
-                            </li>
-                            <li className="nav-item  ">
-                                <Link className="nav-link" to="/viewInformationStore">
-                                    <i className="material-icons">store</i>
-                                    <p>Management Store</p>
-                                </Link>
-                            </li> 
-                            <li className="nav-item  ">
-                                <Link className="nav-link" to="/orderListPage">
-                                    <i className="material-icons">assignment</i>
-                                    <p>Management Order</p>
-                                </Link>
-                            </li> 
-                            <li className="nav-item  ">
-                                <Link className="nav-link" to="/cancelOrderPage">
-                                    <i className="material-icons">remove_shopping_cart</i>
-                                    <p>Management Order Cancel</p>
-                                </Link>
-                            </li> 
-                            <li className="nav-item  ">
-                                <Link className="nav-link" to="/categoriesListPage">
-                                    <i className="material-icons">list_alt</i>
-                                    <p>Management Categories</p>
-                                </Link>
-                            </li> 
-                            <li className="nav-item  ">
-                                <Link className="nav-link" to="/transactionListPage">
-                                    <i className="material-icons">attach_money</i>
-                                    <p>Management Transaction</p>
-                                </Link>
-                            </li> 
-                            <li className="nav-item ">
-                                <Link className="nav-link" to="/viewFeedback">
-                                    <i className="material-icons">feedback</i>
-                                    <p>View Feedback</p>
-                                </Link>
-                            </li>
+  isActive = route => {
+    return route === this.props.location.pathname;
+  };
+  getMenu = role => {
+    return [
+      {
+        name: 'View Static',
+        iconName: 'dashboard',
+        isShow: role === ROLES.STORE_MANAGER || role === ROLES.FOOD_COURT_MANAGER,
+        route: RouteMap.ROUTE_DASHBOARD
+      },
+      { 
+        name: 'Management Staff', 
+        iconName: 'person', 
+        isShow: role === ROLES.FOOD_COURT_MANAGER,
+        route: RouteMap.ROUTE_STAFF
+      },
+      {
+        name: 'Management Member',
+        iconName: 'how_to_reg',
+        isShow: role === ROLES.CASHIER,
+        route: RouteMap.ROUTE_MEMBER
+      },
+      {
+        name: 'Management Food',
+        iconName: 'fastfood',
+        isShow: role === ROLES.STORE_MANAGER,
+        route: RouteMap.ROUTE_PRODUCTS
+      },
+      {
+        name: 'Create Food Court',
+        iconName: 'content_paste',
+        isShow: role === ROLES.SYSTEM_ADMIN,
+        route: RouteMap.ROUTE_MENU
+      },
+      {
+        name: 'Management Store',
+        iconName: 'store',
+        isShow: role === ROLES.FOOD_COURT_MANAGER,
+        route: RouteMap.ROUTE_STORE_INFOMATION
+      },
+      {
+        name: 'Management Order',
+        iconName: 'assignment',
+        isShow: role !== ROLES.SYSTEM_ADMIN,
+        route: RouteMap.ROUTE_ORDER
+      },
+      // {
+      //   name: 'Management Order Cancel',
+      //   iconName: 'remove_shopping_cart',
+      //   route: RouteMap.ROUTE_CANCEL_ORDER
+      // },
+      {
+        name: 'Management Categories',
+        iconName: 'list_alt',
+        isShow: role === ROLES.STORE_MANAGER || role === ROLES.FOOD_COURT_MANAGER,
+        route: RouteMap.ROUTE_CATEGORIES
+      },
+      {
+        name: 'Management Transaction',
+        iconName: 'attach_money',
+        isShow: role === ROLES.CASHIER,
+        route: RouteMap.ROUTE_TRANSACTION
+      },
+      {
+        name: 'View Feedback',
+        iconName: 'feedback',
+        isShow: role === ROLES.STORE_MANAGER,
+        route: RouteMap.ROUTE_FEEDBACK
+      }
+    ]
+  }
 
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        );
-    }
+  render() {
+    const { role } = this.props;
+    console.log('abc:', role)
+    const menu = this.getMenu(role)
+    return (
+      <div>
+        <div
+          className="sidebar"
+          data-color="purple"
+          data-background-color="white"
+          data-image="../assets/img/sidebar-1.jpg"
+        >
+          <div className="logo">
+            <Link to={RouteMap.ROUTE_DASHBOARD}>
+              <div className="simple-text logo-normal">CFOS</div>
+            </Link>
+          </div>
+          <div className="sidebar-wrapper">
+            <ul className="nav">
+              {menu.map((el, index) => {
+                if (el.isShow) 
+                  return (
+                    <li
+                      key={index}
+                      className={`nav-item ${this.isActive(el.route) && 'active'}`}
+                    >
+                      <Link className="nav-link" to={el.route}>
+                        <i className="material-icons">{el.iconName}</i>
+                        <p>{el.name}</p>
+                      </Link>
+                    </li>
+                  )
+              }                
+              )}
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
-export default withRouter(MenuList);
+export default withRouter(
+  connect(
+    state => ({      
+      role: state.system.role
+    }),
+    {
+      // action
+    }
+  )(MenuList)
+);

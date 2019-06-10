@@ -1,25 +1,30 @@
-import React from 'react';
-import { withRouter, BrowserRouter } from 'react-router-dom';
-import Dashboard from './pages/LoginPage/LoginForm';
-import DirectURL from './routes/directURL';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Routes from './Routes';
+import './App.scss';
 import Header from './components/Header/Header';
 import MenuList from './components/Menu/MenuList';
 import Footer from './components/Footer/Footer';
+import { isDiff } from './utils/helpers/helpers';
 
-function App(props) { 
-  console.log(props.location.pathname)
-  const isLogin = props.location.pathname === '/login';
-  return (
-    
-        <div className="wrapper">
+class App extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return isDiff(nextProps.location !== this.props.location);
+  }
+  render() {
+    const { location } = this.props;
+    const isLogin = location.pathname === '/login';
+    return (
+      <div className="wrapper">
         {!isLogin && <Header />}
         {!isLogin && <MenuList />}
-          <div>
-            <DirectURL />
-          </div>
-          {!isLogin && <Footer />}
+        <div>
+          <Routes />
         </div>
-
-  );
+        {!isLogin && <Footer />}
+      </div>
+    );
+  }
 }
+
 export default withRouter(App);
