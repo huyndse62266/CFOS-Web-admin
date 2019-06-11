@@ -76,16 +76,15 @@ class StaffListPage extends Component {
                 </div>
               </div>
               <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Cấp Quyền</label>
-                  <div classname="form-check" style={{marginTop:"20px"}}>
-                    <input classname="form-check-input" type="checkbox" style={{marginRight:"10px"}}/>
-                    <label classname="form-check-label" htmlfor="exampleRadios1">
-                      Active
-                              </label>
-                  </div>
-                </div>
+              <div className="form-group">
+                <label className="bmd-label-floating">Cửa Hàng</label>
+                <select className="form-control">
+                  <option>Select...</option>
+                  <option>Số 1</option>
+
+                </select>
               </div>
+            </div>
             </div>
           </Modal>
           <div className="card">

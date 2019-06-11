@@ -1,7 +1,9 @@
 import React from 'react';
 import { withRouter, Switch, Route, Redirect } from 'react-router-dom';
 import cookie from 'js-cookie';
+import { connect } from 'react-redux';
 import { Constants, RouteMap } from './utils/constants';
+
 import Login from './page/login/Login';
 import NotFound from './page/NotFound';
 import ViewStaticOrder from './page/Order/ViewStatic/ViewStaticOrder';
@@ -17,19 +19,31 @@ import TransactionListPage from './page/Transaction/TransactionListPage/Transact
 import CancelOderPage from './page/CancelOrder/CancelOderPage/CancelOderPage';
 import CreateFoodCourt from './page/CreateFoodCourt/CreateFoodCourt/CreateFoodCourt';
 
-const Routes = ({ location }) => {
-  // const token = cookie.get(Constants.TOKEN);
-  // if (!token && location.pathname !== RouteMap.ROUTE_LOGIN) {
-  //   return <Redirect to={RouteMap.ROUTE_LOGIN} />;
-  // }
+const Logout = () => {
+  cookie.remove(Constants.TOKEN)
+  return <Redirect to={RouteMap.ROUTE_LOGIN} />;
+};
+
+const Routes = ({ location, role }) => {
+  const token = cookie.get(Constants.TOKEN);
+  if (!token && location.pathname !== RouteMap.ROUTE_LOGIN) {
+    return <Redirect to={RouteMap.ROUTE_LOGIN} />;
+  }
+  const checkRole = () => {
+    if (role === Constants.ROLES.FOOD_COURT_MANAGER || role === Constants.ROLES.STORE_MANAGER) return RouteMap.ROUTE_DASHBOARD;
+    if (role === Constants.ROLES.SYSTEM_ADMIN) return RouteMap.ROUTE_CREATE_FOODCOURT;
+    if (role === Constants.ROLES.CHEF || role === Constants.ROLES.CASHIER) return RouteMap.ROUTE_LOGIN;
+  }
   return (
     <Switch>
+      <Redirect exact from="/" to={checkRole()} />
       <Route
         exact
         path={RouteMap.ROUTE_DASHBOARD}
         component={ViewStaticOrder}
       />
       <Route exact path={RouteMap.ROUTE_LOGIN} component={Login} />
+      <Route exact path={RouteMap.ROUTE_LOGOUT} component={Logout} />
       <Route exact path={RouteMap.ROUTE_PRODUCTS} component={ProductListPage} />
       <Route exact path={RouteMap.ROUTE_ADD} component={ProductActionPage} />
       <Route exact path={RouteMap.ROUTE_FEEDBACK} component={ViewFeedback} />
@@ -65,4 +79,13 @@ const Routes = ({ location }) => {
   );
 };
 
-export default withRouter(Routes);
+export default withRouter(
+  connect(
+    state => ({      
+      role: state.system.role
+    }),
+    {
+      // action
+    }
+  )(Routes)
+);

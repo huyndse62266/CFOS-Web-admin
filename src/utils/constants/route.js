@@ -1,8 +1,10 @@
 export const ROUTE_ERROR = '/error';
 export const ROUTE_LOGIN = '/login';
 export const ROUTE_LOGOUT = '/logout';
+export const ROUTE_CHANGE_PASSWORD = '/change-password';
+export const ROUTE_PROFILE = '/profile';
 
-export const ROUTE_DASHBOARD = '/';
+export const ROUTE_DASHBOARD = '/dashboard';
 export const ROUTE_PRODUCTS = '/products';
 export const ROUTE_ADD = '/add';
 export const ROUTE_FEEDBACK = '/feedback';
