@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Modal, Button } from 'antd';
-class StaffListPage extends Component {
+class CreateFoodCourt extends Component {
   state = {
     modal2Visible: false,
   };
@@ -170,4 +170,4 @@ class StaffListPage extends Component {
     );
   }
 }
-export default StaffListPage; 
+export default CreateFoodCourt; 

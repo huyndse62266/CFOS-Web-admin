@@ -8,7 +8,6 @@ import ViewStaticOrder from './page/Order/ViewStatic/ViewStaticOrder';
 import ProductListPage from './page/Product/ProductListPage/ProductListPage';
 import ViewFeedback from './page/Feedback/ViewFeedback';
 import StoreListPage from './page/Store/StorePage/StoreListPage';
-import MenuListPage from './page/Menu/MenuListPage/MenuListPage';
 import ProductActionPage from './page/Product/ProductActionPage/ProductActionPage';
 import OrderListPage from './page/Order/OrderListPage/OrderListPage';
 import StaffListPage from './page/Staff/StaffListPage/StaffListPage';
@@ -16,6 +15,7 @@ import CategoriesListPage from './page/Categories/CategoriesListPage/CategoriesL
 import MemberListPage from './page/Member/MemberListPage/MemberListPage';
 import TransactionListPage from './page/Transaction/TransactionListPage/TransactionListPage';
 import CancelOderPage from './page/CancelOrder/CancelOderPage/CancelOderPage';
+import CreateFoodCourt from './page/CreateFoodCourt/CreateFoodCourt/CreateFoodCourt';
 
 const Routes = ({ location }) => {
   // const token = cookie.get(Constants.TOKEN);
@@ -38,7 +38,7 @@ const Routes = ({ location }) => {
         path={RouteMap.ROUTE_STORE_INFOMATION}
         component={StoreListPage}
       />
-      <Route exact path={RouteMap.ROUTE_MENU} component={MenuListPage} />
+      <Route exact path={RouteMap.ROUTE_CREATE_FOODCOURT} component={CreateFoodCourt} />
       <Route exact path={RouteMap.ROUTE_ORDER} component={OrderListPage} />
       <Route exact path={RouteMap.ROUTE_STAFF} component={StaffListPage} />
       <Route
