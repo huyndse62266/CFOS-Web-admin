@@ -17,8 +17,8 @@ class StaffModal extends Component {
   async componentDidMount() {
     const res = await getListRoles();
     const { data } = await getListFoodCourt();
-    const {store} = await getListStore();
-    this.setState({ roleList: res.data, fcList: data, storeList: store});
+    const store = await getListStore();
+    this.setState({ roleList: res.data, fcList: data, storeList: store.data});
   }
   handleSubmit = e => {
     this.props.form.validateFields(async (err, values) => {
@@ -85,7 +85,7 @@ class StaffModal extends Component {
             </div>
           </div>
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-12">
               <span className="lab-text">Vai Trò</span>
               <Form.Item>
                 {getFieldDecorator("roleId", {
@@ -102,7 +102,7 @@ class StaffModal extends Component {
                 )}
               </Form.Item>
             </div>
-            <div className="col-md-6">
+            {/* <div className="col-md-6">
               <span className="lab-text">Food Court</span>
               <Form.Item>
                 {getFieldDecorator("fcId", {
@@ -118,7 +118,7 @@ class StaffModal extends Component {
                   </Select>
                 )}
               </Form.Item>
-            </div>
+            </div> */}
           </div>
           <div className="row">
             <div className="col-md-12">

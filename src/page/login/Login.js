@@ -28,6 +28,7 @@ class Login extends Component {
     // implement redirect page after login success
     if (role === ROLES.SYSTEM_ADMIN) return routes.ROUTE_CREATE_FOODCOURT;
     if(role === ROLES.FOOD_COURT_MANAGER || role === ROLES.STORE_MANAGER) return routes.ROUTE_DASHBOARD;
+    if (role === ROLES.CASHIER) return routes.ROUTE_MEMBER;
     return routes.ROUTE_LOGIN;
 
   }
