@@ -1,92 +1,25 @@
 import React, { Component } from "react";
-import { Modal, Button } from 'antd';
+import {  Button } from 'antd';
+import StaffModal from './StaffModal';
 class StaffListPage extends Component {
   state = {
-    modal2Visible: false,
+    visibleModal: false,
   };
 
-  setModal2Visible(modal2Visible) {
-    this.setState({ modal2Visible });
+  openModal = () => this.setState({ visibleModal: true });
+  handleCancel = () => this.setState({ visibleModal: false });
+  componentDidMount() {
+
   }
   render() {
+    const { visibleModal } = this.state;
     return (
       <div style={{ paddingLeft: "20%", paddingTop: "5%" }}>
         <div className="col-lg-12" >
-          <Button type="primary" onClick={() => this.setModal2Visible(true)}>
+          <Button type="primary" onClick={this.openModal}>
             Tạo Mới Account
         </Button>
-          <Modal
-            title="Tạo Mới Account"
-            centered
-            visible={this.state.modal2Visible}
-            onOk={() => this.setModal2Visible(false)}
-            onCancel={() => this.setModal2Visible(false)}
-          >
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Username</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Họ Tên</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Địa chỉ</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Email</label>
-                  <input type="text" className="form-control" />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Ngày Sinh</label>
-                  <input type="date" className="form-control" />
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Số Điện Thoại</label>
-                  <input type="number" className="form-control" />
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-md-6">
-                <div className="form-group">
-                  <label className="bmd-label-floating">Vai Trò</label>
-                  <select className="form-control">
-                    <option>Select...</option>
-                    <option>FoodCourt</option>
-
-                  </select>
-                </div>
-              </div>
-              <div className="col-md-6">
-              <div className="form-group">
-                <label className="bmd-label-floating">Cửa Hàng</label>
-                <select className="form-control">
-                  <option>Select...</option>
-                  <option>Số 1</option>
-
-                </select>
-              </div>
-            </div>
-            </div>
-          </Modal>
+        
           <div className="card">
             <div className="d-flex flex-row-reverse input-group card-header col-md-12">
               <div className="d-flex flex-row-reverse col-md-4">
@@ -165,6 +98,10 @@ class StaffListPage extends Component {
             </div>
           </div>
         </div>
+        {
+          visibleModal &&
+            <StaffModal visible={visibleModal} cancelModal={this.handleCancel}/>
+        }
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Modal, Button } from 'antd';
+import { Button } from 'antd';
 import FoodCourtModal from './FoodCourtModal';
 
 class CreateFoodCourt extends Component {

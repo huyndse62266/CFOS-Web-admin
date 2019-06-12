@@ -1,39 +1,39 @@
 import React, { Component } from "react";
-import { Modal, Button, Form, Select, Input,message } from "antd";
+import { Modal, Button, Form, Select, Input, message } from "antd";
 import {
   getListRoles,
   getListFoodCourt,
-  createFoodCourt
-} from "./FoodCourtService";
+  getListStore,
+  createStaff
+} from "./StaffService";
 import { isEmpty } from "../../../utils/helpers/helpers";
-class FoodCourtModal extends Component {
+class StaffModal extends Component {
   state = {
     roleList: [],
-    fcList: []
+    fcList: [],
+    storeList: []
   };
-
   // async để call api, await hoạt động
   async componentDidMount() {
     const res = await getListRoles();
     const { data } = await getListFoodCourt();
-    this.setState({ roleList: res.data, fcList: data });
+    const {store} = await getListStore();
+    this.setState({ roleList: res.data, fcList: data, storeList: store});
   }
-
   handleSubmit = e => {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
-        await createFoodCourt(values);
+        await createStaff(values);
         message.success("create success");
         this.props.cancelModal();
       }
     });
   };
-
   render() {
     const { getFieldDecorator } = this.props.form;
     const { visible } = this.props;
-    const { roleList, fcList } = this.state;
+    const { roleList, fcList, storeList } = this.state;
     return (
       <Modal
         title="Tạo Mới Account"
@@ -84,24 +84,6 @@ class FoodCourtModal extends Component {
               </Form.Item>
             </div>
           </div>
-          {/* <div className="row">
-            <div className="col-md-6">
-              <span className="lab-text">Ngày Sinh</span>
-              <Form.Item>
-                {getFieldDecorator("birthday", {
-                  rules: [{ required: true, message: "hay nhap birthday!" }]
-                })(<DatePicker />)}
-              </Form.Item>
-            </div>
-            <div className="col-md-6">
-              <span className="lab-text">Số Điện Thoại</span>
-              <Form.Item>
-                {getFieldDecorator("phone", {
-                  rules: [{ required: true, message: "hay nhap phone!" }]
-                })(<Input placeholder="phone" />)}
-              </Form.Item>
-            </div>
-          </div> */}
           <div className="row">
             <div className="col-md-6">
               <span className="lab-text">Vai Trò</span>
@@ -138,9 +120,29 @@ class FoodCourtModal extends Component {
               </Form.Item>
             </div>
           </div>
+          <div className="row">
+            <div className="col-md-12">
+            <span className="lab-text">Cửa Hàng</span>
+              <Form.Item>
+                {getFieldDecorator("storeId", {
+                  rules: [{ required: true, message: "hay nhap Store!" }]
+                })(
+                  <Select style={{ width: "100%" }}>
+                    {!isEmpty(storeList) &&
+                      storeList.map(el => (
+                        <Select.Option value={el.storeId} key={el.storeId}>
+                          {el.storeName}
+                        </Select.Option>
+                      ))}
+                  </Select>
+                )}
+              </Form.Item>
+            </div>
+          </div>
         </Form>
       </Modal>
     );
   }
 }
-export default Form.create()(FoodCourtModal);
+
+export default Form.create()(StaffModal);
