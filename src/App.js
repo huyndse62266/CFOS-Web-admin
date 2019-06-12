@@ -36,15 +36,17 @@ class App extends Component {
         <div>
           <Routes />
         </div>
-        {!isLogin && <Footer />}
+        {/* {!isLogin && <Footer />} */}
       </div>
     );
   }
 }
 
-export default withRouter(connect(
-  null,
-  {
-    updateRole
-  }
-)(App));
+export default withRouter(
+  connect(
+    null,
+    {
+      updateRole
+    }
+  )(App)
+);

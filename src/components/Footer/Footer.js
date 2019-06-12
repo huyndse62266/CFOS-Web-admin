@@ -15,7 +15,7 @@ export default class Footer extends Component {
                             </div>
                             <div className=" d-flex justify-content-end align-items-center col-lg-6">
                                 <div className="float-right">
-                                    <h5>© 2019 Copyright by <a className="text-info">CFOS Team</a></h5>
+                                    <h5>© 2019 Copyright by <p className="text-info">CFOS Team</p></h5>
                                     
                                 </div>
                             </div>

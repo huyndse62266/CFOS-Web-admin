@@ -6,12 +6,6 @@ export const getListRoles = () => {
         url: '/api/all-role'
     });
 }
-export const getListFoodCourt = () => {
-    return api({
-        method: 'get',
-        url: '/api/all/food-court'
-    });
-}
 export const getListStore = () => {
     return api({
         method: 'get',

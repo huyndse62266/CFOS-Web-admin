@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Modal, Button, Form, Select, Input, message } from "antd";
 import {
   getListRoles,
-  getListFoodCourt,
   getListStore,
   createStaff
 } from "./StaffService";
@@ -11,29 +10,31 @@ class StaffModal extends Component {
   state = {
     roleList: [],
     fcList: [],
-    storeList: []
+    storeList: [],
+    roleId: ''
   };
   // async để call api, await hoạt động
   async componentDidMount() {
     const res = await getListRoles();
-    const { data } = await getListFoodCourt();
+  
     const store = await getListStore();
-    this.setState({ roleList: res.data, fcList: data, storeList: store.data});
+    this.setState({ roleList: res.data, storeList: store.data});
   }
   handleSubmit = e => {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        // console.log("Received values of form: ", values);
         await createStaff(values);
         message.success("create success");
         this.props.cancelModal();
       }
     });
   };
+  handleSelect = value => this.setState({ roleId: value });
   render() {
     const { getFieldDecorator } = this.props.form;
     const { visible } = this.props;
-    const { roleList, fcList, storeList } = this.state;
+    const { roleList, storeList, roleId } = this.state;
     return (
       <Modal
         title="Tạo Mới Account"
@@ -91,7 +92,7 @@ class StaffModal extends Component {
                 {getFieldDecorator("roleId", {
                   rules: [{ required: true, message: "hay nhap Role!" }]
                 })(
-                  <Select style={{ width: "100%" }}>
+                  <Select style={{ width: "100%" }} onSelect={this.handleSelect}>
                     {!isEmpty(roleList) &&
                       roleList.map(el => (
                         <Select.Option value={el.roleId} key={el.roleId}>
@@ -102,43 +103,28 @@ class StaffModal extends Component {
                 )}
               </Form.Item>
             </div>
-            {/* <div className="col-md-6">
-              <span className="lab-text">Food Court</span>
-              <Form.Item>
-                {getFieldDecorator("fcId", {
-                  rules: [{ required: true, message: "hay nhap fcId!" }]
-                })(
-                  <Select style={{ width: "100%" }}>
-                    {!isEmpty(fcList) &&
-                      fcList.map(el => (
-                        <Select.Option value={el.fcId} key={el.fcId}>
-                          {el.fcName}
-                        </Select.Option>
-                      ))}
-                  </Select>
-                )}
-              </Form.Item>
-            </div> */}
           </div>
-          <div className="row">
-            <div className="col-md-12">
-            <span className="lab-text">Cửa Hàng</span>
-              <Form.Item>
-                {getFieldDecorator("storeId", {
-                  rules: [{ required: true, message: "hay nhap Store!" }]
-                })(
-                  <Select style={{ width: "100%" }}>
-                    {!isEmpty(storeList) &&
-                      storeList.map(el => (
-                        <Select.Option value={el.storeId} key={el.storeId}>
-                          {el.storeName}
-                        </Select.Option>
-                      ))}
-                  </Select>
-                )}
-              </Form.Item>
+          {(roleId === 5 || roleId === 4) && (
+            <div className="row">
+              <div className="col-md-12">
+                <span className="lab-text">Cửa Hàng</span>
+                <Form.Item>
+                  {getFieldDecorator("storeId", {
+                    rules: [{ required: true, message: "hay nhap Store!" }]
+                  })(
+                    <Select style={{ width: "100%" }}>
+                      {!isEmpty(storeList) &&
+                        storeList.map(el => (
+                          <Select.Option value={el.storeId} key={el.storeId}>
+                            {el.storeName}
+                          </Select.Option>
+                        ))}
+                    </Select>
+                  )}
+                </Form.Item>
+              </div>
             </div>
-          </div>
+          )}          
         </Form>
       </Modal>
     );

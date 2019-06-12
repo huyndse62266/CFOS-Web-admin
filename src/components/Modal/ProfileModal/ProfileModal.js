@@ -1,90 +1,112 @@
-import React, { Component } from 'react';
-
+import React, { Component } from "react";
+import { Modal, Form, Input, message, DatePicker } from "antd";
+import moment from 'moment';
+import {
+    getProfile,updateProfile
+} from "./ProfileService";
+import { isEmpty } from "../../../utils/helpers/helpers";
 class ProfileModal extends Component {
-    render() {
-        return (         
-                 <div className="modal fade" id="profileModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div className="modal-dialog" role="document">
-                        <div className="modal-content">
-                        <div className="modal-header">
-                            <h5 className="modal-title" id="exampleModalLabel">Profile</h5>
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div className="modal-body">
-                        <form>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="bmd-label-floating">Username</label>
-                          <input type="text" className="form-control"  disabled value="HuyND62266"/>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="bmd-label-floating">
-                            Email address
-                          </label>
-                          <input type="email" className="form-control"disabled value="huyndse62266@fpt.edu.vn"/>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="bmd-label-floating">
-                            Fist Name
-                          </label>
-                          <input type="text" className="form-control" disabled value="Huy"/>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="bmd-label-floating">
-                            Last Name
-                          </label>
-                          <input type="text" className="form-control" disabled value="Nguyễn Đức"/>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-12">
-                        <div className="form-group">
-                          <label className="bmd-label-floating">Adress</label>
-                          <input type="text" className="form-control" disabled value="Quận Bình Tân, TP HCM"/>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="bmd-label-floating">Birthday</label>
-                          <input type="text" className="form-control" disabled value="1/1/1997"/>
-                        </div>
-                      </div>
-                      <div className="col-md-6">
-                        <div className="form-group">
-                          <label className="bmd-label-floating">Phone</label>
-                          <input type="text" className="form-control" disabled value="0932082096"/>
-                        </div>
-                      </div>
-                      
-                    </div>
-                   
-                    <div className="clearfix" />
-                  </form>
-                        </div>
-                        <div className="modal-footer">
-                           
-                            <button type="button" className="btn btn-primary">Save changes</button>
-                        </div>
-                        </div>
-                    </div>
-                </div>
+  state = {
+     profile: {},
+     date: ''
+  }
+  // async để call api, await hoạt động
+  async componentDidMount() {
+    const res = await getProfile();
+    // const { data } = await getListFoodCourt();
+    // const store = await getListStore();
+    this.setState({ profile: res.data });
+   }
+  handleSubmit = e => {
+    this.props.form.validateFields(async (err, values) => {
+      if (!err) {
+        const { date } = this.state;
+        await updateProfile({...this.state.profile, ...values, birthday: date});
+        message.success("create success");
+        this.props.cancelModal();
+      }
+    });
+  };
+  onChange = (value, dateString) => {
+    this.setState({ date: dateString })
+  }
+  render() {
+    const { getFieldDecorator } = this.props.form;
+    const { visible } = this.props;
+    const {profile} = this.state;
+    return (
+      <Modal
+        title="Tạo Mới Account"
+        centered
+        width={960}
+        visible={visible}
+        okText="Update"
+        onOk={this.handleSubmit}
+        onCancel={() => this.props.cancelModal()}
+      >
+        <Form>
+          <div className="row">
+            <div className="col-md-6">
+              <span className="lab-text">Username</span>
+              <Form.Item>
+                {getFieldDecorator("username", {
+                  initialValue: profile.username,
+                  rules: [
+                    { required: true, message: "Please input your username!" }
+                  ]
+                })(<Input placeholder="Username" />)}
+              </Form.Item>
+            </div>
+            <div className="col-md-6">
+              <span className="lab-text">Họ Tên</span>
+              <Form.Item>
+                {getFieldDecorator("fullname", {
+                  initialValue: profile.fullname
+                })(<Input placeholder="fullname" />)}
+              </Form.Item>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <span className="lab-text">Số Điện Thoại</span>
+              <Form.Item>
+                {getFieldDecorator("phone", {
+                  initialValue: profile.phone                 
+                })(<Input placeholder="phone" />)}
+              </Form.Item>
+            </div>
+            <div className="col-md-6">
+              <span className="lab-text">Email</span>
+              <Form.Item>
+                {getFieldDecorator("email", {
+                  initialValue: profile.email                
+                })(<Input placeholder="abc@gmail.com" />)}
+              </Form.Item>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6">
+              <span className="lab-text">Địa Chỉ</span>
+              <Form.Item>
+                {getFieldDecorator("address", {
+                  initialValue: profile.address
+                })(<Input placeholder="Địa chỉ" />)}
+              </Form.Item>
+            </div>
+            <div className="col-md-6">
+              <span className="lab-text">Ngày Sinh</span>
+              <Form.Item>
+                {getFieldDecorator("birthday", {
+                  initialValue: !isEmpty(profile.birthday) ? moment(profile.birthday) : null
+                })(<DatePicker onChange={this.onChange}/>)}
+              </Form.Item>
+            </div>
+          </div>
          
-        );
-    }
+        </Form>
+      </Modal>
+    );
+  }
 }
 
-export default ProfileModal;
+export default Form.create()(ProfileModal);

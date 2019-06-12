@@ -1,25 +1,23 @@
 import React, { Component } from "react";
-import {  Button } from 'antd';
-import MemberModal from './MemberModal';
+import { Button } from "antd";
+import MemberModal from "./MemberModal";
 class MemberListPage extends Component {
   state = {
-    visibleModal: false,
+    visibleModal: false
   };
 
   openModal = () => this.setState({ visibleModal: true });
   handleCancel = () => this.setState({ visibleModal: false });
-  componentDidMount() {
-
-  }
+  componentDidMount() {}
   render() {
     const { visibleModal } = this.state;
     return (
       <div style={{ paddingLeft: "20%", paddingTop: "5%" }}>
-        <div className="col-lg-12" >
+        <div className="col-lg-12">
           <Button type="primary" onClick={this.openModal}>
             Tạo Mới Account
-        </Button>
-        
+          </Button>
+
           <div className="card">
             <div className="d-flex flex-row-reverse input-group card-header col-md-12">
               <div className="d-flex flex-row-reverse col-md-4">
@@ -71,39 +69,48 @@ class MemberListPage extends Component {
                       <button className="btn btn-success btn-sm">Active</button>
                     </td>
                   </tr>
-
-
                 </tbody>
               </table>
               <ul className="pagination">
                 <li className="page-item">
-                  <a className="page-link" href="#">Prev</a>
+                  <a className="page-link" href="#">
+                    Prev
+                  </a>
                 </li>
                 <li className="page-item active">
-                  <a className="page-link" href="#">1</a>
+                  <a className="page-link" href="#">
+                    1
+                  </a>
                 </li>
                 <li className="page-item">
-                  <a className="page-link" href="#">2</a>
+                  <a className="page-link" href="#">
+                    2
+                  </a>
                 </li>
                 <li className="page-item">
-                  <a className="page-link" href="#">3</a>
+                  <a className="page-link" href="#">
+                    3
+                  </a>
                 </li>
                 <li className="page-item">
-                  <a className="page-link" href="#">4</a>
+                  <a className="page-link" href="#">
+                    4
+                  </a>
                 </li>
                 <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
+                  <a className="page-link" href="#">
+                    Next
+                  </a>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-        {
-          visibleModal &&
-            <MemberModal visible={visibleModal} cancelModal={this.handleCancel}/>
-        }
+        {visibleModal && (
+          <MemberModal visible={visibleModal} cancelModal={this.handleCancel} />
+        )}
       </div>
     );
   }
 }
-export default MemberListPage; 
+export default MemberListPage;

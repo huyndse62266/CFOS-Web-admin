@@ -6,13 +6,24 @@ import ChangePasswordModal from '../Modal/ChangePassword/ChangePasswordModal';
 import './Header.scss';
 
 class Header extends Component {
-
-  handleClick = item => {
-    console.log('test', item.key);
-    window.location.href = '#' + item.key;
+  state = {
+    visible: false,
+    type: ''
   }
+  handleClick = item => {
+    if (item.key === routes.ROUTE_PROFILE) {
+      this.setState({ visible: true, type: 'profile' })
+    } else if (item.key === routes.ROUTE_CHANGE_PASSWORD) {
+      this.setState({ visible: true, type: 'password' })
+    }
+     else {
+      window.location.href = '#' + item.key;
+    }   
+  }
+  handleCancelModal = () => this.setState({ visible: false, type: '' })
 
   render() {
+    const { visible, type } = this.state;
     const menu = (
     <Menu onClick={this.handleClick}>
       <Menu.Item key={routes.ROUTE_PROFILE}>Profile</Menu.Item>
@@ -25,6 +36,8 @@ class Header extends Component {
         <Dropdown overlay={menu}>
           <Icon type="user" className="user-icon" />
         </Dropdown>
+        {visible && type === 'profile' && <ProfileModal visible={visible} cancelModal={this.handleCancelModal} />}
+        {visible && type === 'password' &&<ChangePasswordModal visible={visible} cancelModal={this.handleCancelModal} />}
       </Layout.Header>
     );
   }

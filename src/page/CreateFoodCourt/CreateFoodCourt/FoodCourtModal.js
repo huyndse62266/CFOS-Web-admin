@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { Modal, Button, Form, Select, Input,message } from "antd";
+import React, { Component } from 'react';
+import { Modal, Button, Form, Select, Input, message } from 'antd';
 import {
   getListRoles,
   getListFoodCourt,
   createFoodCourt
-} from "./FoodCourtService";
-import { isEmpty } from "../../../utils/helpers/helpers";
+} from './FoodCourtService';
+import { isEmpty } from '../../../utils/helpers/helpers';
 class FoodCourtModal extends Component {
   state = {
     roleList: [],
@@ -22,10 +22,11 @@ class FoodCourtModal extends Component {
   handleSubmit = e => {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        console.log('Received values of form: ', values);
         await createFoodCourt(values);
-        message.success("create success");
+        message.success('create success');
         this.props.cancelModal();
+        this.props.fetchData();
       }
     });
   };
@@ -48,9 +49,9 @@ class FoodCourtModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Username</span>
               <Form.Item>
-                {getFieldDecorator("username", {
+                {getFieldDecorator('username', {
                   rules: [
-                    { required: true, message: "Please input your username!" }
+                    { required: true, message: 'Please input your username!' }
                   ]
                 })(<Input placeholder="Username" />)}
               </Form.Item>
@@ -58,9 +59,9 @@ class FoodCourtModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Họ Tên</span>
               <Form.Item>
-                {getFieldDecorator("fullname", {
+                {getFieldDecorator('fullname', {
                   rules: [
-                    { required: true, message: "Please input your fullname!" }
+                    { required: true, message: 'Please input your fullname!' }
                   ]
                 })(<Input placeholder="fullname" />)}
               </Form.Item>
@@ -70,16 +71,16 @@ class FoodCourtModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Số Điện Thoại</span>
               <Form.Item>
-                {getFieldDecorator("phone", {
-                  rules: [{ required: true, message: "hay nhap phone!" }]
+                {getFieldDecorator('phone', {
+                  rules: [{ required: true, message: 'hay nhap phone!' }]
                 })(<Input placeholder="phone" />)}
               </Form.Item>
             </div>
             <div className="col-md-6">
               <span className="lab-text">Email</span>
               <Form.Item>
-                {getFieldDecorator("email", {
-                  rules: [{ required: true, message: "hay nhap Địa chỉ!" }]
+                {getFieldDecorator('email', {
+                  rules: [{ required: true, message: 'hay nhap Địa chỉ!' }]
                 })(<Input placeholder="address" />)}
               </Form.Item>
             </div>
@@ -106,10 +107,10 @@ class FoodCourtModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Vai Trò</span>
               <Form.Item>
-                {getFieldDecorator("roleId", {
-                  rules: [{ required: true, message: "hay nhap Role!" }]
+                {getFieldDecorator('roleId', {
+                  rules: [{ required: true, message: 'hay nhap Role!' }]
                 })(
-                  <Select style={{ width: "100%" }}>
+                  <Select style={{ width: '100%' }}>
                     {!isEmpty(roleList) &&
                       roleList.map(el => (
                         <Select.Option value={el.roleId} key={el.roleId}>
@@ -123,10 +124,10 @@ class FoodCourtModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Food Court</span>
               <Form.Item>
-                {getFieldDecorator("fcId", {
-                  rules: [{ required: true, message: "hay nhap fcId!" }]
+                {getFieldDecorator('fcId', {
+                  rules: [{ required: true, message: 'hay nhap fcId!' }]
                 })(
-                  <Select style={{ width: "100%" }}>
+                  <Select style={{ width: '100%' }}>
                     {!isEmpty(fcList) &&
                       fcList.map(el => (
                         <Select.Option value={el.fcId} key={el.fcId}>
