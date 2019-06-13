@@ -35,14 +35,20 @@ class MenuList extends Component {
         route: RouteMap.ROUTE_PRODUCTS
       },
       {
-        name: 'Create Food Court',
-        iconName: 'content_paste',
+        name: 'Manage Foodcourt Manager',
+        iconName: 'person',
         isShow: role === ROLES.SYSTEM_ADMIN,
         route: RouteMap.ROUTE_CREATE_FOODCOURT
       },
       {
-        name: 'Management Store',
+        name: 'Manage FoodCourt',
         iconName: 'store',
+        isShow: role === ROLES.SYSTEM_ADMIN,
+        route: RouteMap.ROUTE_MANAGE_FOODCOURT
+      },
+      {
+        name: 'Management Store',
+        iconName: 'store_mall_directory',
         isShow: role === ROLES.FOOD_COURT_MANAGER,
         route: RouteMap.ROUTE_STORE_INFOMATION
       },

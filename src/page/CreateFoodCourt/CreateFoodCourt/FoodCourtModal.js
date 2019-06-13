@@ -30,7 +30,6 @@ class FoodCourtModal extends Component {
       }
     });
   };
-
   render() {
     const { getFieldDecorator } = this.props.form;
     const { visible } = this.props;

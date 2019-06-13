@@ -10,6 +10,7 @@ export const ROUTE_ADD = '/add';
 export const ROUTE_FEEDBACK = '/feedback';
 export const ROUTE_STORE_INFOMATION = '/store-information';
 export const ROUTE_CREATE_FOODCOURT = '/create';
+export const ROUTE_MANAGE_FOODCOURT = '/foodcourt';
 export const ROUTE_ORDER = '/order';
 export const ROUTE_STAFF = '/staff';
 export const ROUTE_CATEGORIES = '/categories';

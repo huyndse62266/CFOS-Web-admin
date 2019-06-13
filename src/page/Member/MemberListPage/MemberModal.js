@@ -20,6 +20,7 @@ class MemberModal extends Component {
         await createMember(values);
         message.success("create success");
         this.props.cancelModal();
+        this.props.fetchData();
       }
     });
   };

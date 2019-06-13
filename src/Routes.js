@@ -18,6 +18,7 @@ import MemberListPage from './page/Member/MemberListPage/MemberListPage';
 import TransactionListPage from './page/Transaction/TransactionListPage/TransactionListPage';
 import CancelOderPage from './page/CancelOrder/CancelOderPage/CancelOderPage';
 import CreateFoodCourt from './page/CreateFoodCourt/CreateFoodCourt/CreateFoodCourt';
+import ManageFoodCourt from './page/MangeFoodCourt/MangeFoodCourt/ManageFCPage';
 
 const Logout = () => {
   cookie.remove(Constants.TOKEN)
@@ -47,6 +48,7 @@ const Routes = ({ location, role }) => {
       <Route exact path={RouteMap.ROUTE_PRODUCTS} component={ProductListPage} />
       <Route exact path={RouteMap.ROUTE_ADD} component={ProductActionPage} />
       <Route exact path={RouteMap.ROUTE_FEEDBACK} component={ViewFeedback} />
+      <Route exact path={RouteMap.ROUTE_MANAGE_FOODCOURT} component={ManageFoodCourt}/>
       <Route
         exact
         path={RouteMap.ROUTE_STORE_INFOMATION}
@@ -81,7 +83,7 @@ const Routes = ({ location, role }) => {
 
 export default withRouter(
   connect(
-    state => ({      
+    state => ({
       role: state.system.role
     }),
     {

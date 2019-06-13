@@ -27,6 +27,7 @@ class StaffModal extends Component {
         await createStaff(values);
         message.success("create success");
         this.props.cancelModal();
+        this.props.fetchData();
       }
     });
   };

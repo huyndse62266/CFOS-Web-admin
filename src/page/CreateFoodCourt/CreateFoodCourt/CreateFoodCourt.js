@@ -22,7 +22,7 @@ class CreateFoodCourt extends Component {
   };
   handleUpdate = item => {
     Modal.confirm({
-      title: 'Change Status?',
+      title: 'Change Status ?',
       content: (
         <span>
           Do you want change status from&nbsp;
