@@ -1,121 +1,145 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { Collapse, Icon, Button } from 'antd';
+import './CategoryFC.scss';
+import { getCategoryFc } from './CategoryService';
+import { isEmpty } from '../../../utils/helpers/helpers';
+import { MODE } from '../../../utils/constants/constants';
+import CategoryFCModal from './CategoryFCModal';
+import CategorySubModal from './CategorySubModal';
+
+const Panel = Collapse.Panel;
 
 class CategoriesListPage extends Component {
+  state = {
+    listCategoryFC: {},
+    categoryModal: { visible: false, mode: MODE.ADD, item: {} },
+    subCategoryModal: { visible: false, mode: MODE.ADD, item: {}, parent: {} }
+  };
+  componentDidMount() {
+    this.fetchCategory();
+  }
+  fetchCategory = async () => {
+    try {
+      const res = await getCategoryFc();
+      this.setState({ listCategoryFC: res.data });
+    } catch (err) {}
+  };
+
+  // category modal
+  createCategoryModal = () => {
+    const temp = { visible: true, mode: MODE.ADD, item: {} };
+    this.setState({ categoryModal: temp });
+  };
+  editCategoryModal = element => {
+    const temp = { visible: true, mode: MODE.EDIT, item: element };
+    this.setState({ categoryModal: temp });
+  };
+  cancelCategoryModal = () => {
+    const temp = { visible: false, mode: MODE.ADD, item: {} };
+    this.setState({ categoryModal: temp });
+  };
+
+  // sub category modal
+  createSubCategoryModal = el => {
+    const temp = { visible: true, mode: MODE.ADD, item: {}, parent: el };
+    this.setState({ subCategoryModal: temp });
+  };
+  editSubCategoryModal = (element, parentElement) => {
+    const temp = {
+      visible: true,
+      mode: MODE.EDIT,
+      item: element,
+      parent: parentElement
+    };
+    this.setState({ subCategoryModal: temp });
+  };
+  cancelSubCategoryModal = () => {
+    const temp = { visible: false, mode: MODE.ADD, item: {}, parent: {} };
+    this.setState({ subCategoryModal: temp });
+  };
+
   render() {
+    const { listCategoryFC, categoryModal, subCategoryModal } = this.state;
+    console.log('test', subCategoryModal);
     return (
-      <div style={{ paddingLeft: "20%", paddingTop: "5%" }}>
-        <div className="col-lg-10" >
+      <div className="category-container">
+        <div className="col-lg-10">
           <div className="card">
-            <div className="card-header">
-              <i className="fa fa-align-justify" /> Category Table</div>
+            <div className="header-wrapper">
+              <p className="header-page">Category Foodcourt</p>
+              <Button type="primary" onClick={this.createCategoryModal}>
+                Create Category
+              </Button>
+            </div>
+
             <div className="card-body">
-              <table className="table table-responsive-sm table-striped">
-                <thead>
-                  <tr>
-                    <th>STT</th>
-                    <th>Tên</th>
-                    <th>Ảnh</th>
-                    <th>Loại Thức Ăn</th>
-                    <th>Giá</th>
-                    <th>Mô tả</th>
-                    <th>Số lượng</th>
-                    <th>Trạng thái</th>
-                    <th>Hành Động</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Yiorgos Avraamu</td>
-                    <td>2012/01/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-success">Active</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Avram Tarasios</td>
-                    <td>2012/02/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-danger">Banned</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Quintin Ed</td>
-                    <td>2012/02/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-secondary">Inactive</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Enéas Kwadwo</td>
-                    <td>2012/03/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-warning">Pending</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Agapetus Tadeáš</td>
-                    <td>2012/01/21</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-success">Active</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <ul className="pagination">
-                <li className="page-item">
-                  <a className="page-link" href="#">Prev</a>
-                </li>
-                <li className="page-item active">
-                  <a className="page-link" href="#">1</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">2</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">3</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">4</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
-                </li>
-              </ul>
+              <Collapse
+                bordered={false}
+                expandIcon={({ isActive }) => (
+                  <Icon type="caret-right" rotate={isActive ? 90 : 0} />
+                )}
+              >
+                {!isEmpty(listCategoryFC) &&
+                  listCategoryFC.map(el => (
+                    <Panel
+                      header={el.fcCategoryName}
+                      key={el.fcCategoryId}
+                      className="panel-item"
+                      extra={
+                        <span>
+                          <Icon
+                            type="plus-circle"
+                            onClick={e => {
+                              this.createSubCategoryModal(el);
+                              e.stopPropagation();
+                            }}
+                          />
+                          &nbsp;
+                          <Icon
+                            type="edit"
+                            onClick={e => {
+                              this.editCategoryModal(el);
+                              e.stopPropagation();
+                            }}
+                          />
+                        </span>
+                      }
+                    >
+                      {!isEmpty(el.categoryVM) &&
+                        el.categoryVM.map(item => (
+                          <div className="sub-cate-item" key={item.categoryId}>
+                            <p className="text-item">{item.categoryName}</p>
+                            <Icon
+                              type="edit"
+                              onClick={e => {
+                                this.editSubCategoryModal(item, el);
+                                e.stopPropagation();
+                              }}
+                            />
+                          </div>
+                        ))}
+                    </Panel>
+                  ))}
+              </Collapse>
             </div>
           </div>
         </div>
+        {categoryModal.visible && (
+          <CategoryFCModal
+            categoryModal={categoryModal}
+            cancelModal={this.cancelCategoryModal}
+            fetchData={this.fetchCategory}
+          />
+        )}
+        {subCategoryModal.visible && (
+          <CategorySubModal
+            subCategoryModal={subCategoryModal}
+            cancelModal={this.cancelSubCategoryModal}
+            fetchData={this.fetchCategory}
+          />
+        )}
       </div>
     );
   }
 }
-export default CategoriesListPage; 
+export default CategoriesListPage;

@@ -11,6 +11,10 @@ export const LOGIN_CONST = {
   LOGIN: 'LOGIN'
 };
 export const LAST_LOGIN = 'lastLogin';
+export const MODE = {
+  ADD: 'ADD',
+  EDIT: 'EDIT'
+};
 
 export const ROLES = {
   SYSTEM_ADMIN: 'SYSTEM_ADMIN',

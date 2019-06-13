@@ -1,7 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import { Button, Table, Input, Tooltip, Icon, Modal, Pagination } from 'antd';
 import StaffModal from './StaffModal';
-import { getListUser, updateStatusUser, searchUser } from './../../CreateFoodCourt/CreateFoodCourt/FoodCourtService';
+import {
+  getListUser,
+  updateStatusUser,
+  searchUser
+} from './../../CreateFoodCourt/CreateFoodCourt/FoodCourtService';
 import './Staff.scss';
 import { isEmpty } from '../../../utils/helpers/helpers';
 class StaffListPage extends Component {
@@ -18,7 +22,7 @@ class StaffListPage extends Component {
   fetchUser = async params => {
     const res = await getListUser(params);
     this.setState({ userList: res.data });
-  }
+  };
   handelUpdate = item => {
     Modal.confirm({
       title: 'Change Status?',
@@ -39,15 +43,15 @@ class StaffListPage extends Component {
         try {
           await updateStatusUser({ ...item, active: !item.active });
           this.fetchUser();
-        } catch (err) { }
+        } catch (err) {}
       },
-      onCancel() { }
+      onCancel() {}
     });
   };
   handleSearch = async value => {
     const res = await searchUser({ name: value });
     this.setState({ userList: res.data });
-  }
+  };
   changePagination = (page, pageSize) => {
     this.fetchUser({ page: page - 1 });
   };
@@ -108,8 +112,8 @@ class StaffListPage extends Component {
             {record.active ? (
               <span style={{ color: '#1890ff' }}>active</span>
             ) : (
-                <span style={{ color: 'red' }}>inative</span>
-              )}
+              <span style={{ color: 'red' }}>inative</span>
+            )}
           </span>
         ),
         align: 'center',
@@ -123,7 +127,7 @@ class StaffListPage extends Component {
             <Icon
               type="edit"
               className="edit-icon"
-              onClick={() => this.handleUpdate(record)}
+              onClick={() => this.handelUpdate(record)}
             />
           </Tooltip>
         ),
@@ -132,8 +136,8 @@ class StaffListPage extends Component {
       }
     ];
     return (
-      <div style={{ paddingLeft: "20%", paddingTop: "5%" }}>
-        <div className="col-lg-12 header-page-container" >
+      <div style={{ paddingLeft: '20%', paddingTop: '5%' }}>
+        <div className="col-lg-12 header-page-container">
           <Button
             type="primary"
             className="create-btn"
@@ -165,15 +169,17 @@ class StaffListPage extends Component {
               />
             </div>
           )}
-
         </div>
 
-        {
-          visibleModal && (<StaffModal visible={visibleModal} cancelModal={this.handleCancel} fetchData={this.fetchUser} />)
-
-        }
+        {visibleModal && (
+          <StaffModal
+            visible={visibleModal}
+            cancelModal={this.handleCancel}
+            fetchData={this.fetchUser}
+          />
+        )}
       </div>
     );
   }
 }
-export default StaffListPage; 
+export default StaffListPage;
