@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { RouteMap } from '../../utils/constants';
-import { ROLES } from '../../utils/constants/constants'
+import { ROLES } from '../../utils/constants/constants';
 
 class MenuList extends Component {
   isActive = route => {
@@ -13,12 +13,13 @@ class MenuList extends Component {
       {
         name: 'View Static',
         iconName: 'dashboard',
-        isShow: role === ROLES.STORE_MANAGER || role === ROLES.FOOD_COURT_MANAGER,
+        isShow:
+          role === ROLES.STORE_MANAGER || role === ROLES.FOOD_COURT_MANAGER,
         route: RouteMap.ROUTE_DASHBOARD
       },
-      { 
-        name: 'Management Staff', 
-        iconName: 'person', 
+      {
+        name: 'Management Staff',
+        iconName: 'person',
         isShow: role === ROLES.FOOD_COURT_MANAGER,
         route: RouteMap.ROUTE_STAFF
       },
@@ -53,6 +54,12 @@ class MenuList extends Component {
         route: RouteMap.ROUTE_STORE_INFOMATION
       },
       {
+        name: 'Management Category',
+        iconName: 'store_mall_directory',
+        isShow: role === ROLES.STORE_MANAGER,
+        route: RouteMap.ROUTE_MANAGE_CATEGORY_STORE
+      },
+      {
         name: 'Management Order',
         iconName: 'assignment',
         isShow: role !== ROLES.SYSTEM_ADMIN,
@@ -66,7 +73,7 @@ class MenuList extends Component {
       {
         name: 'Management Categories',
         iconName: 'list_alt',
-        isShow: role === ROLES.STORE_MANAGER || role === ROLES.FOOD_COURT_MANAGER,
+        isShow: role === ROLES.FOOD_COURT_MANAGER,
         route: RouteMap.ROUTE_CATEGORIES
       },
       {
@@ -81,13 +88,13 @@ class MenuList extends Component {
         isShow: role === ROLES.STORE_MANAGER,
         route: RouteMap.ROUTE_FEEDBACK
       }
-    ]
-  }
+    ];
+  };
 
   render() {
     const { role } = this.props;
-    console.log('abc:', role)
-    const menu = this.getMenu(role)
+    console.log('abc:', role);
+    const menu = this.getMenu(role);
     return (
       <div>
         <div
@@ -104,20 +111,20 @@ class MenuList extends Component {
           <div className="sidebar-wrapper">
             <ul className="nav">
               {menu.map((el, index) => {
-                if (el.isShow) 
+                if (el.isShow)
                   return (
                     <li
                       key={index}
-                      className={`nav-item ${this.isActive(el.route) && 'active'}`}
+                      className={`nav-item ${this.isActive(el.route) &&
+                        'active'}`}
                     >
                       <Link className="nav-link" to={el.route}>
                         <i className="material-icons">{el.iconName}</i>
                         <p>{el.name}</p>
                       </Link>
                     </li>
-                  )
-              }                
-              )}
+                  );
+              })}
             </ul>
           </div>
         </div>
@@ -127,7 +134,7 @@ class MenuList extends Component {
 }
 export default withRouter(
   connect(
-    state => ({      
+    state => ({
       role: state.system.role
     }),
     {

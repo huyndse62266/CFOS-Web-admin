@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { Modal, Form, Input, message, Radio } from 'antd';
-import { createStore, updateStore } from './StoreService';
+import {
+  createCategoryStore,
+  updateCategoryStore
+} from './CategoryStoreService';
 import { MODE } from '../../../utils/constants/constants';
-class StoreModal extends Component {
+class CategoryStoreModal extends Component {
   async componentDidMount() {}
   handleSubmit = e => {
     this.props.form.validateFields(async (err, values) => {
@@ -10,11 +13,11 @@ class StoreModal extends Component {
         const { mode, itemSelected } = this.props;
         try {
           if (mode === MODE.ADD) {
-            await createStore(values);
-            message.success('create success');
+            await createCategoryStore(values);
+            message.success('Tạo mới thành công');
           } else {
-            await updateStore({ ...itemSelected, ...values });
-            message.success('update success');
+            await updateCategoryStore({ ...itemSelected, ...values });
+            message.success('Chỉnh sửa thành công');
           }
           this.props.cancelModal();
           this.props.fetchData();
@@ -26,7 +29,9 @@ class StoreModal extends Component {
     const { getFieldDecorator } = this.props.form;
     const { visible, mode, itemSelected } = this.props;
     const titleModal =
-      visible.mode === MODE.ADD ? 'Tạo Mới Store' : 'Chỉnh Sửa Store';
+      visible.mode === MODE.ADD
+        ? 'Tạo Mới Danh Mục Thức Ăn'
+        : 'Chỉnh Sửa Danh Mục Thức Ăn';
     return (
       <Modal
         title={titleModal}
@@ -38,25 +43,15 @@ class StoreModal extends Component {
         <Form>
           <div className="row">
             <div className="col-md-12">
-              <span className="lab-text">Tên Cửa Hàng</span>
+              <span className="lab-text">Tên Danh Mục</span>
               <Form.Item>
-                {getFieldDecorator('storeName', {
+                {getFieldDecorator('categoryName', {
                   initialValue:
-                    mode === MODE.EDIT ? itemSelected.storeName : '',
-                  rules: [{ required: true, message: 'Chưa Nhập Tên Store!' }]
-                })(<Input placeholder="storeName" />)}
-              </Form.Item>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-12">
-              <span className="lab-text">Mô tả</span>
-              <Form.Item>
-                {getFieldDecorator('storeDescription', {
-                  initialValue:
-                    mode === MODE.EDIT ? itemSelected.storeDescription : '',
-                  rules: [{ required: true, message: 'Chưa Nhập Mô Tả!' }]
-                })(<Input placeholder="storeDescription" />)}
+                    mode === MODE.EDIT ? itemSelected.categoryName : '',
+                  rules: [
+                    { required: true, message: 'Chưa Nhập Tên Danh Mục!' }
+                  ]
+                })(<Input placeholder="categoryName" />)}
               </Form.Item>
             </div>
           </div>
@@ -83,4 +78,4 @@ class StoreModal extends Component {
   }
 }
 
-export default Form.create()(StoreModal);
+export default Form.create()(CategoryStoreModal);

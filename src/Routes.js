@@ -19,9 +19,9 @@ import TransactionListPage from './page/Transaction/TransactionListPage/Transact
 import CancelOderPage from './page/CancelOrder/CancelOderPage/CancelOderPage';
 import CreateFoodCourt from './page/CreateFoodCourt/CreateFoodCourt/CreateFoodCourt';
 import ManageFoodCourt from './page/MangeFoodCourt/MangeFoodCourt/ManageFCPage';
-
+import CatagoryStore from './page/CategoryStore/CategoryStore/CategoryStorePage';
 const Logout = () => {
-  cookie.remove(Constants.TOKEN)
+  cookie.remove(Constants.TOKEN);
   return <Redirect to={RouteMap.ROUTE_LOGIN} />;
 };
 
@@ -31,10 +31,16 @@ const Routes = ({ location, role }) => {
     return <Redirect to={RouteMap.ROUTE_LOGIN} />;
   }
   const checkRole = () => {
-    if (role === Constants.ROLES.FOOD_COURT_MANAGER || role === Constants.ROLES.STORE_MANAGER) return RouteMap.ROUTE_DASHBOARD;
-    if (role === Constants.ROLES.SYSTEM_ADMIN) return RouteMap.ROUTE_CREATE_FOODCOURT;
-    if (role === Constants.ROLES.CHEF || role === Constants.ROLES.CASHIER) return RouteMap.ROUTE_LOGIN;
-  }
+    if (
+      role === Constants.ROLES.FOOD_COURT_MANAGER ||
+      role === Constants.ROLES.STORE_MANAGER
+    )
+      return RouteMap.ROUTE_DASHBOARD;
+    if (role === Constants.ROLES.SYSTEM_ADMIN)
+      return RouteMap.ROUTE_CREATE_FOODCOURT;
+    if (role === Constants.ROLES.CHEF || role === Constants.ROLES.CASHIER)
+      return RouteMap.ROUTE_LOGIN;
+  };
   return (
     <Switch>
       <Redirect exact from="/" to={checkRole()} />
@@ -48,13 +54,26 @@ const Routes = ({ location, role }) => {
       <Route exact path={RouteMap.ROUTE_PRODUCTS} component={ProductListPage} />
       <Route exact path={RouteMap.ROUTE_ADD} component={ProductActionPage} />
       <Route exact path={RouteMap.ROUTE_FEEDBACK} component={ViewFeedback} />
-      <Route exact path={RouteMap.ROUTE_MANAGE_FOODCOURT} component={ManageFoodCourt}/>
+      <Route
+        exact
+        path={RouteMap.ROUTE_MANAGE_FOODCOURT}
+        component={ManageFoodCourt}
+      />
+      <Route
+        exact
+        path={RouteMap.ROUTE_MANAGE_CATEGORY_STORE}
+        component={CatagoryStore}
+      />
       <Route
         exact
         path={RouteMap.ROUTE_STORE_INFOMATION}
         component={StoreListPage}
       />
-      <Route exact path={RouteMap.ROUTE_CREATE_FOODCOURT} component={CreateFoodCourt} />
+      <Route
+        exact
+        path={RouteMap.ROUTE_CREATE_FOODCOURT}
+        component={CreateFoodCourt}
+      />
       <Route exact path={RouteMap.ROUTE_ORDER} component={OrderListPage} />
       <Route exact path={RouteMap.ROUTE_STAFF} component={StaffListPage} />
       <Route

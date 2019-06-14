@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { TOKEN, EXPIRED_TIME } from '../../utils/constants/constants';
 import { ROLES } from '../../utils/constants/constants';
 import * as routes from '../../utils/constants/route';
-import {requestLogin} from './LoginService';
+import { requestLogin } from './LoginService';
 import { updateRole } from '../system/systemAction';
 import './Login.scss';
 
@@ -23,21 +23,21 @@ class Login extends Component {
   decode = token => {
     const decoded = jwt_decode(token);
     return decoded.JWTAuthoritiesKey;
-  }
+  };
   handleRedirect = role => {
     // implement redirect page after login success
     if (role === ROLES.SYSTEM_ADMIN) return routes.ROUTE_CREATE_FOODCOURT;
-    if(role === ROLES.FOOD_COURT_MANAGER || role === ROLES.STORE_MANAGER) return routes.ROUTE_DASHBOARD;
+    if (role === ROLES.FOOD_COURT_MANAGER || role === ROLES.STORE_MANAGER)
+      return routes.ROUTE_DASHBOARD;
     if (role === ROLES.CASHIER) return routes.ROUTE_MEMBER;
     return routes.ROUTE_LOGIN;
-
-  }
+  };
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields(async (error, values) => {
       if (!error) {
         this.setState({ loading: true });
-        try {         
+        try {
           const res = await requestLogin(values);
           const auth = res.headers.authorization.split(' ')[1];
           Cookie.set(TOKEN, auth);

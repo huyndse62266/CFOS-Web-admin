@@ -9,14 +9,14 @@ export const getListStore = () => {
 export const createStore = data => {
   return api({
     method: 'post',
-    url: '/api/stores',
+    url: '/api/store/create',
     data
   });
 };
 export const updateStore = data => {
   return api({
     method: 'put',
-    url: '/api/stores',
+    url: '/api/store/update',
     data
   });
 };

@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import { Button, Table, Tooltip, Icon } from 'antd';
-import StoreModal from './StoreModal';
-import { getListStore } from './StoreService';
+import CategoryStoreModal from './CategoryStoreModal';
+import { getListCategoryStore } from './CategoryStoreService';
 import { isEmpty } from '../../../utils/helpers/helpers';
-import './StorePage.scss';
+import './CategoryPage.scss';
 import { MODE } from '../../../utils/constants/constants';
 
-class StoreListPage extends Component {
+class CategoryStorePage extends Component {
   state = {
     visibleModal: false,
     mode: MODE.ADD,
     itemSelected: {},
-    storeList: []
+    categoryStoreList: []
   };
   openModal = () => {
     this.setState({ visibleModal: true, mode: MODE.ADD, itemSelected: {} });
@@ -28,11 +28,11 @@ class StoreListPage extends Component {
     this.fetchUser();
   }
   fetchUser = async () => {
-    const res = await getListStore();
-    this.setState({ storeList: res.data });
+    const res = await getListCategoryStore();
+    this.setState({ categoryStoreList: res.data });
   };
   render() {
-    const { visibleModal, itemSelected, mode, storeList } = this.state;
+    const { visibleModal, itemSelected, mode, categoryStoreList } = this.state;
     const columns = [
       {
         title: 'STT',
@@ -42,14 +42,9 @@ class StoreListPage extends Component {
         key: 'no'
       },
       {
-        title: 'Tên Store',
-        dataIndex: 'storeName',
-        key: 'storeName'
-      },
-      {
-        title: 'Mô Tả Store',
-        dataIndex: 'storeDescription',
-        key: 'storeDescription'
+        title: 'Tên Danh Mục',
+        dataIndex: 'categoryName',
+        key: 'categoryName'
       },
       {
         title: 'Status',
@@ -85,7 +80,7 @@ class StoreListPage extends Component {
     return (
       <div
         style={{ paddingLeft: '20%', paddingTop: '5%' }}
-        className="manage-fc-container"
+        className="category-store-container"
       >
         <div className="col-lg-12 header-page-container">
           <Button
@@ -98,14 +93,14 @@ class StoreListPage extends Component {
         </div>
         <div className="card-body">
           <Table
-            dataSource={!isEmpty(storeList) ? storeList : []}
+            dataSource={!isEmpty(categoryStoreList) ? categoryStoreList : []}
             columns={columns}
             bordered
             pagination={false}
           />
         </div>
         {visibleModal && (
-          <StoreModal
+          <CategoryStoreModal
             visible={visibleModal}
             itemSelected={itemSelected}
             mode={mode}
@@ -117,4 +112,4 @@ class StoreListPage extends Component {
     );
   }
 }
-export default StoreListPage;
+export default CategoryStorePage;

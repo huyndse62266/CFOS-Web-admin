@@ -49,8 +49,12 @@ class StaffListPage extends Component {
     });
   };
   handleSearch = async value => {
-    const res = await searchUser({ name: value });
-    this.setState({ userList: res.data });
+    if (isEmpty(value.trim())) {
+      this.fetchUser();
+    } else {
+      const res = await searchUser({ name: value });
+      this.setState({ userList: res.data });
+    }
   };
   changePagination = (page, pageSize) => {
     this.fetchUser({ page: page - 1 });
