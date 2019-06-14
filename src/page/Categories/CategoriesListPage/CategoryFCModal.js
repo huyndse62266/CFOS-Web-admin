@@ -26,7 +26,9 @@ class CategoryFCModal extends Component {
     const { getFieldDecorator } = this.props.form;
     const { categoryModal } = this.props;
     const titleModal =
-      categoryModal.mode === MODE.ADD ? 'Tao moi category' : 'Update category';
+      categoryModal.mode === MODE.ADD
+        ? 'Tạo Mới Danh Mục'
+        : 'Chỉnh Sửa Danh Mục';
     return (
       <Modal
         title={titleModal}
@@ -40,7 +42,7 @@ class CategoryFCModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Foodcourt Category</span>
               <Form.Item>
-                {getFieldDecorator('fcCategoryName', {
+                {getFieldDecorator('categoryName', {
                   initialValue:
                     categoryModal.mode === MODE.EDIT
                       ? categoryModal.item.fcCategoryName

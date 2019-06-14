@@ -20,6 +20,8 @@ import CancelOderPage from './page/CancelOrder/CancelOderPage/CancelOderPage';
 import CreateFoodCourt from './page/CreateFoodCourt/CreateFoodCourt/CreateFoodCourt';
 import ManageFoodCourt from './page/MangeFoodCourt/MangeFoodCourt/ManageFCPage';
 import CatagoryStore from './page/CategoryStore/CategoryStore/CategoryStorePage';
+import UpdateFoodCourtPage from './page/UpdateInfoFoodCourt/InfoFoodCourt/UpdateFoodCourtPage';
+import UpdateStorePage from './page/UpdateInfoStore/InfoStore/UpdateStorePage';
 const Logout = () => {
   cookie.remove(Constants.TOKEN);
   return <Redirect to={RouteMap.ROUTE_LOGIN} />;
@@ -61,6 +63,11 @@ const Routes = ({ location, role }) => {
       />
       <Route
         exact
+        path={RouteMap.ROUTE_UPDATE_FOODCOURT}
+        component={UpdateFoodCourtPage}
+      />
+      <Route
+        exact
         path={RouteMap.ROUTE_MANAGE_CATEGORY_STORE}
         component={CatagoryStore}
       />
@@ -68,6 +75,11 @@ const Routes = ({ location, role }) => {
         exact
         path={RouteMap.ROUTE_STORE_INFOMATION}
         component={StoreListPage}
+      />
+      <Route
+        exact
+        path={RouteMap.ROUTE_STORE_UPDATE}
+        component={UpdateStorePage}
       />
       <Route
         exact
