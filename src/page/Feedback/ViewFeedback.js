@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class ViewFeedback extends Component {
-    render() {
-        return (
-            <div style={{paddingLeft: "20%",paddingTop:"5%"}}>
-            <div className="col-lg-10" >
+  render() {
+    return (
+      <div style={{ paddingLeft: '20%', paddingTop: '5%' }}>
+        <div className="col-lg-10">
           <div className="card">
             <div className="card-header">
-              <i className="fa fa-align-justify" /> Feedback Table</div>
+              <i className="fa fa-align-justify" /> Feedback Table
+            </div>
             <div className="card-body">
               <table className="table table-responsive-sm table-striped">
                 <thead>
@@ -91,32 +92,11 @@ class ViewFeedback extends Component {
                   </tr>
                 </tbody>
               </table>
-              <ul className="pagination">
-                <li className="page-item">
-                  <a className="page-link" href="#">Prev</a>
-                </li>
-                <li className="page-item active">
-                  <a className="page-link" href="#">1</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">2</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">3</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">4</a>
-                </li>
-                <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
-        </div>
-      
-        );
-    }
+      </div>
+    );
+  }
 }
-export default ViewFeedback; 
+export default ViewFeedback;

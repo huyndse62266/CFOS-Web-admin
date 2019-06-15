@@ -1,11 +1,7 @@
-import React, { Component } from "react";
-import { Modal, Button, Form, Select, Input, message } from "antd";
-import {
-  getListRoles,
-  getListStore,
-  createStaff
-} from "./StaffService";
-import { isEmpty } from "../../../utils/helpers/helpers";
+import React, { Component } from 'react';
+import { Modal, Form, Select, Input, message } from 'antd';
+import { getListRoles, getListStore, createStaff } from './StaffService';
+import { isEmpty } from '../../../utils/helpers/helpers';
 class StaffModal extends Component {
   state = {
     roleList: [],
@@ -16,16 +12,16 @@ class StaffModal extends Component {
   // async để call api, await hoạt động
   async componentDidMount() {
     const res = await getListRoles();
-  
+
     const store = await getListStore();
-    this.setState({ roleList: res.data, storeList: store.data});
+    this.setState({ roleList: res.data, storeList: store.data });
   }
   handleSubmit = e => {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         // console.log("Received values of form: ", values);
         await createStaff(values);
-        message.success("create success");
+        message.success('create success');
         this.props.cancelModal();
         this.props.fetchData();
       }
@@ -50,9 +46,9 @@ class StaffModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Username</span>
               <Form.Item>
-                {getFieldDecorator("username", {
+                {getFieldDecorator('username', {
                   rules: [
-                    { required: true, message: "Please input your username!" }
+                    { required: true, message: 'Please input your username!' }
                   ]
                 })(<Input placeholder="Username" />)}
               </Form.Item>
@@ -60,9 +56,9 @@ class StaffModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Họ Tên</span>
               <Form.Item>
-                {getFieldDecorator("fullname", {
+                {getFieldDecorator('fullname', {
                   rules: [
-                    { required: true, message: "Please input your fullname!" }
+                    { required: true, message: 'Please input your fullname!' }
                   ]
                 })(<Input placeholder="fullname" />)}
               </Form.Item>
@@ -72,16 +68,16 @@ class StaffModal extends Component {
             <div className="col-md-6">
               <span className="lab-text">Số Điện Thoại</span>
               <Form.Item>
-                {getFieldDecorator("phone", {
-                  rules: [{ required: true, message: "hay nhap phone!" }]
+                {getFieldDecorator('phone', {
+                  rules: [{ required: true, message: 'hay nhap phone!' }]
                 })(<Input placeholder="phone" />)}
               </Form.Item>
             </div>
             <div className="col-md-6">
               <span className="lab-text">Email</span>
               <Form.Item>
-                {getFieldDecorator("email", {
-                  rules: [{ required: true, message: "hay nhap Địa chỉ!" }]
+                {getFieldDecorator('email', {
+                  rules: [{ required: true, message: 'hay nhap Địa chỉ!' }]
                 })(<Input placeholder="address" />)}
               </Form.Item>
             </div>
@@ -90,10 +86,13 @@ class StaffModal extends Component {
             <div className="col-md-12">
               <span className="lab-text">Vai Trò</span>
               <Form.Item>
-                {getFieldDecorator("roleId", {
-                  rules: [{ required: true, message: "hay nhap Role!" }]
+                {getFieldDecorator('roleId', {
+                  rules: [{ required: true, message: 'hay nhap Role!' }]
                 })(
-                  <Select style={{ width: "100%" }} onSelect={this.handleSelect}>
+                  <Select
+                    style={{ width: '100%' }}
+                    onSelect={this.handleSelect}
+                  >
                     {!isEmpty(roleList) &&
                       roleList.map(el => (
                         <Select.Option value={el.roleId} key={el.roleId}>
@@ -110,10 +109,10 @@ class StaffModal extends Component {
               <div className="col-md-12">
                 <span className="lab-text">Cửa Hàng</span>
                 <Form.Item>
-                  {getFieldDecorator("storeId", {
-                    rules: [{ required: true, message: "hay nhap Store!" }]
+                  {getFieldDecorator('storeId', {
+                    rules: [{ required: true, message: 'hay nhap Store!' }]
                   })(
-                    <Select style={{ width: "100%" }}>
+                    <Select style={{ width: '100%' }}>
                       {!isEmpty(storeList) &&
                         storeList.map(el => (
                           <Select.Option value={el.storeId} key={el.storeId}>
@@ -125,7 +124,7 @@ class StaffModal extends Component {
                 </Form.Item>
               </div>
             </div>
-          )}          
+          )}
         </Form>
       </Modal>
     );

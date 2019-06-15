@@ -10,7 +10,6 @@ import ViewStaticOrder from './page/Order/ViewStatic/ViewStaticOrder';
 import ProductListPage from './page/Product/ProductListPage/ProductListPage';
 import ViewFeedback from './page/Feedback/ViewFeedback';
 import StoreListPage from './page/Store/StorePage/StoreListPage';
-import ProductActionPage from './page/Product/ProductActionPage/ProductActionPage';
 import OrderListPage from './page/Order/OrderListPage/OrderListPage';
 import StaffListPage from './page/Staff/StaffListPage/StaffListPage';
 import CategoriesListPage from './page/Categories/CategoriesListPage/CategoriesListPage';
@@ -20,8 +19,7 @@ import CancelOderPage from './page/CancelOrder/CancelOderPage/CancelOderPage';
 import CreateFoodCourt from './page/CreateFoodCourt/CreateFoodCourt/CreateFoodCourt';
 import ManageFoodCourt from './page/MangeFoodCourt/MangeFoodCourt/ManageFCPage';
 import CatagoryStore from './page/CategoryStore/CategoryStore/CategoryStorePage';
-import UpdateFoodCourtPage from './page/UpdateInfoFoodCourt/InfoFoodCourt/UpdateFoodCourtPage';
-import UpdateStorePage from './page/UpdateInfoStore/InfoStore/UpdateStorePage';
+
 const Logout = () => {
   cookie.remove(Constants.TOKEN);
   return <Redirect to={RouteMap.ROUTE_LOGIN} />;
@@ -54,17 +52,11 @@ const Routes = ({ location, role }) => {
       <Route exact path={RouteMap.ROUTE_LOGIN} component={Login} />
       <Route exact path={RouteMap.ROUTE_LOGOUT} component={Logout} />
       <Route exact path={RouteMap.ROUTE_PRODUCTS} component={ProductListPage} />
-      <Route exact path={RouteMap.ROUTE_ADD} component={ProductActionPage} />
       <Route exact path={RouteMap.ROUTE_FEEDBACK} component={ViewFeedback} />
       <Route
         exact
         path={RouteMap.ROUTE_MANAGE_FOODCOURT}
         component={ManageFoodCourt}
-      />
-      <Route
-        exact
-        path={RouteMap.ROUTE_UPDATE_FOODCOURT}
-        component={UpdateFoodCourtPage}
       />
       <Route
         exact
@@ -75,11 +67,6 @@ const Routes = ({ location, role }) => {
         exact
         path={RouteMap.ROUTE_STORE_INFOMATION}
         component={StoreListPage}
-      />
-      <Route
-        exact
-        path={RouteMap.ROUTE_STORE_UPDATE}
-        component={UpdateStorePage}
       />
       <Route
         exact

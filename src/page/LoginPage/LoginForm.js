@@ -34,7 +34,6 @@ class LoginForm extends Component {
     this.setState({
       Role: decoded.sub
     });
-    console.log(decoded);
   }
 
   login() {

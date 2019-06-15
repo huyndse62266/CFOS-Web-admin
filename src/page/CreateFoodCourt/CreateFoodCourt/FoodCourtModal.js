@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Modal, Button, Form, Select, Input, message } from 'antd';
+import { Modal, Form, Select, Input, message } from 'antd';
 import {
   getListRoles,
   getListFoodCourt,
@@ -84,24 +84,7 @@ class FoodCourtModal extends Component {
               </Form.Item>
             </div>
           </div>
-          {/* <div className="row">
-            <div className="col-md-6">
-              <span className="lab-text">Ngày Sinh</span>
-              <Form.Item>
-                {getFieldDecorator("birthday", {
-                  rules: [{ required: true, message: "hay nhap birthday!" }]
-                })(<DatePicker />)}
-              </Form.Item>
-            </div>
-            <div className="col-md-6">
-              <span className="lab-text">Số Điện Thoại</span>
-              <Form.Item>
-                {getFieldDecorator("phone", {
-                  rules: [{ required: true, message: "hay nhap phone!" }]
-                })(<Input placeholder="phone" />)}
-              </Form.Item>
-            </div>
-          </div> */}
+
           <div className="row">
             <div className="col-md-6">
               <span className="lab-text">Vai Trò</span>

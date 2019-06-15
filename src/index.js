@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { IntlProvider } from 'react-intl';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import store from './configStore';
-
 
 const getLocale = () => ({ locale: 'en', messages: {} });
 const app = (

@@ -47,24 +47,14 @@ class MenuList extends Component {
         isShow: role === ROLES.SYSTEM_ADMIN,
         route: RouteMap.ROUTE_MANAGE_FOODCOURT
       },
-      {
-        name: 'Edit FoodCourt',
-        iconName: 'edit',
-        isShow: role === ROLES.FOOD_COURT_MANAGER,
-        route: RouteMap.ROUTE_UPDATE_FOODCOURT
-      },
+
       {
         name: 'Management Store',
         iconName: 'store_mall_directory',
         isShow: role === ROLES.FOOD_COURT_MANAGER,
         route: RouteMap.ROUTE_STORE_INFOMATION
       },
-      {
-        name: 'Edit Store',
-        iconName: 'edit',
-        isShow: role === ROLES.STORE_MANAGER,
-        route: RouteMap.ROUTE_STORE_UPDATE
-      },
+
       {
         name: 'Management Category',
         iconName: 'store_mall_directory',
@@ -105,7 +95,6 @@ class MenuList extends Component {
 
   render() {
     const { role } = this.props;
-    console.log('abc:', role);
     const menu = this.getMenu(role);
     return (
       <div>

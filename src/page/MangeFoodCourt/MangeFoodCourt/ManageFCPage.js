@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Table, Tooltip, Icon } from 'antd';
 import ManageFCModal from './ManageFCModal';
-import { getAllFoodCourt, updateFoodCourt } from './ManageFCService';
+import { getAllFoodCourt } from './ManageFCService';
 import { isEmpty } from './../../../utils/helpers/helpers';
 import './ManageFC.scss';
 import { MODE } from './../../../utils/constants/constants';
