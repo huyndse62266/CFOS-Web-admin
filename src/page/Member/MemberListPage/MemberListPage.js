@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Button, Table, Input, Tooltip, Icon, Modal, Pagination } from "antd";
-import MemberModal from "./MemberModal";
+import React, { Component } from 'react';
+import { Button, Table, Input, Tooltip, Icon, Modal, Pagination } from 'antd';
+import MemberModal from './MemberModal';
 import { getListMember, updateStatusUser, searchUser } from './MemberService';
 import './Member.scss';
 import { isEmpty } from '../../../utils/helpers/helpers';
@@ -18,7 +18,7 @@ class MemberListPage extends Component {
   fetchUser = async params => {
     const res = await getListMember(params);
     this.setState({ memberList: res.data });
-  }
+  };
   handleUpdate = item => {
     Modal.confirm({
       title: 'Change Status ?',
@@ -39,9 +39,9 @@ class MemberListPage extends Component {
         try {
           await updateStatusUser({ ...item, active: !item.active });
           this.fetchUser();
-        } catch (err) { }
+        } catch (err) {}
       },
-      onCancel() { }
+      onCancel() {}
     });
   };
   handleSearch = async value => {
@@ -99,7 +99,7 @@ class MemberListPage extends Component {
         key: 'email'
       },
       {
-        title: 'Vai Trò',
+        title: 'Số Tiền Trong Tài Khoản',
         dataIndex: 'roleId',
         key: 'roleId',
         align: 'center'
@@ -112,8 +112,8 @@ class MemberListPage extends Component {
             {record.active ? (
               <span style={{ color: '#1890ff' }}>active</span>
             ) : (
-                <span style={{ color: 'red' }}>inative</span>
-              )}
+              <span style={{ color: 'red' }}>inative</span>
+            )}
           </span>
         ),
         align: 'center',
@@ -136,7 +136,7 @@ class MemberListPage extends Component {
       }
     ];
     return (
-      <div style={{ paddingLeft: "20%", paddingTop: "5%" }}>
+      <div style={{ paddingLeft: '20%', paddingTop: '5%' }}>
         <div className="col-lg-12 header-page-container">
           <Button
             type="primary"
@@ -171,7 +171,11 @@ class MemberListPage extends Component {
         </div>
 
         {visibleModal && (
-          <MemberModal visible={visibleModal} cancelModal={this.handleCancel} fetchData={this.fetchUser} />
+          <MemberModal
+            visible={visibleModal}
+            cancelModal={this.handleCancel}
+            fetchData={this.fetchUser}
+          />
         )}
       </div>
     );

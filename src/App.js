@@ -7,7 +7,7 @@ import Routes from './Routes';
 import './App.scss';
 import Header from './components/Header/Header';
 import MenuList from './components/Menu/MenuList';
-import Footer from './components/Footer/Footer';
+// import Footer from './components/Footer/Footer';
 // import { isDiff } from './utils/helpers/helpers';
 import { TOKEN } from './utils/constants/constants';
 import * as routes from './utils/constants/route';

@@ -112,7 +112,7 @@ class MenuList extends Component {
           <div className="sidebar-wrapper">
             <ul className="nav">
               {menu.map((el, index) => {
-                if (el.isShow)
+                if (el.isShow) {
                   return (
                     <li
                       key={index}
@@ -125,6 +125,8 @@ class MenuList extends Component {
                       </Link>
                     </li>
                   );
+                }
+                return '';
               })}
             </ul>
           </div>

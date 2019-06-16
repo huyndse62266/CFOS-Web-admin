@@ -6,6 +6,27 @@ export const getListCategoryStore = () => {
     url: '/api/stores/all-category'
   });
 };
+export const getCategoryFc = () => {
+  return api({
+    method: 'get',
+    url: '/api/foodcourt/all-category'
+  });
+};
+export const getListFoodByCate = categoryId => {
+  return api({
+    method: 'get',
+    url: '/api/category/food',
+    params: { categoryId }
+  });
+};
+
+export const createFood = data => {
+  return api({
+    method: 'post',
+    url: '/api/create-food',
+    data
+  });
+};
 export const createCategoryStore = data => {
   return api({
     method: 'post',
@@ -17,6 +38,13 @@ export const updateCategoryStore = data => {
   return api({
     method: 'put',
     url: '/api/stores/update-category',
+    data
+  });
+};
+export const updateFood = data => {
+  return api({
+    method: 'put',
+    url: '/api/update-food',
     data
   });
 };

@@ -1,102 +1,128 @@
 import React, { Component } from 'react';
-import { Pagination } from 'antd';
+import { Collapse, Icon, Button } from 'antd';
+import './CateFood.scss';
+import { getListCategoryStore } from './CateFoodService';
+import { isEmpty } from '../../../utils/helpers/helpers';
+import { MODE } from '../../../utils/constants/constants';
+import CategoryModal from './CategoryModal';
+import FoodModal from './FoodModal';
+import Item from './Item';
+
+const Panel = Collapse.Panel;
 
 class ProductListPage extends Component {
+  state = {
+    listCategory: {},
+    categoryModal: { visible: false, mode: MODE.ADD, item: {} },
+    foodModal: { visible: false, mode: MODE.ADD, item: {}, parent: {} }
+  };
+  componentDidMount() {
+    this.fetchCategory();
+  }
+  fetchCategory = async () => {
+    try {
+      const res = await getListCategoryStore();
+      this.setState({ listCategory: res.data });
+    } catch (err) {}
+  };
+
+  // category modal
+  createCategoryModal = () => {
+    const temp = { visible: true, mode: MODE.ADD, item: {} };
+    this.setState({ categoryModal: temp });
+  };
+  editCategoryModal = element => {
+    const temp = { visible: true, mode: MODE.EDIT, item: element };
+    this.setState({ categoryModal: temp });
+  };
+  cancelCategoryModal = () => {
+    const temp = { visible: false, mode: MODE.ADD, item: {} };
+    this.setState({ categoryModal: temp });
+  };
+
+  // food modal
+  createFoodModal = el => {
+    const temp = { visible: true, mode: MODE.ADD, item: {}, parent: el };
+    this.setState({ foodModal: temp });
+  };
+  editFoodModal = (element, parent) => {
+    const temp = { visible: true, mode: MODE.EDIT, item: element, parent };
+    this.setState({ foodModal: temp });
+  };
+  cancelFoodModal = () => {
+    const temp = { visible: false, mode: MODE.ADD, item: {}, parent: {} };
+    this.setState({ foodModal: temp });
+  };
   render() {
+    const { listCategory, categoryModal, foodModal } = this.state;
     return (
-      <div style={{ paddingLeft: '20%', paddingTop: '5%' }}>
+      <div className="category-container">
         <div className="col-lg-10">
           <div className="card">
-            <div className="card-header">
-              <i className="fa fa-align-justify" /> Order Table
+            <div className="header-wrapper">
+              <p className="header-page">Danh Sách Món Ăn</p>
+              <Button type="primary" onClick={this.createCategoryModal}>
+                Tạo Danh Mục
+              </Button>
             </div>
+
             <div className="card-body">
-              <table className="table table-responsive-sm table-striped">
-                <thead>
-                  <tr>
-                    <th>STT</th>
-                    <th>Tên</th>
-                    <th>Ảnh</th>
-                    <th>Loại Thức Ăn</th>
-                    <th>Giá</th>
-                    <th>Mô tả</th>
-                    <th>Số lượng</th>
-                    <th>Trạng thái</th>
-                    <th>Hành Động</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Yiorgos Avraamu</td>
-                    <td>2012/01/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-success">Active</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Avram Tarasios</td>
-                    <td>2012/02/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-danger">Banned</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Quintin Ed</td>
-                    <td>2012/02/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-secondary">Inactive</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Enéas Kwadwo</td>
-                    <td>2012/03/01</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-warning">Pending</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Agapetus Tadeáš</td>
-                    <td>2012/01/21</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>Member</td>
-                    <td>
-                      <span className="badge badge-success">Active</span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <Pagination defaultCurrent={1} total={50} />
+              <Collapse
+                bordered={false}
+                expandIcon={({ isActive }) => (
+                  <Icon type="caret-right" rotate={isActive ? 90 : 0} />
+                )}
+              >
+                {!isEmpty(listCategory) &&
+                  listCategory.map(el => (
+                    <Panel
+                      header={el.categoryName}
+                      key={el.categoryId}
+                      className="panel-item"
+                      extra={
+                        <span>
+                          <Icon
+                            type="plus-circle"
+                            onClick={e => {
+                              this.createFoodModal(el);
+                              e.stopPropagation();
+                            }}
+                          />
+                          &nbsp;
+                          <Icon
+                            type="edit"
+                            onClick={e => {
+                              this.editCategoryModal(el);
+                              e.stopPropagation();
+                            }}
+                          />
+                        </span>
+                      }
+                    >
+                      <Item
+                        categoryId={el.categoryId}
+                        editFoodModal={item => this.editFoodModal(item, el)}
+                      />
+                    </Panel>
+                  ))}
+              </Collapse>
             </div>
           </div>
         </div>
+        {categoryModal.visible && (
+          <CategoryModal
+            categoryModal={categoryModal}
+            cancelModal={this.cancelCategoryModal}
+            fetchData={this.fetchCategory}
+          />
+        )}
+        {foodModal.visible && (
+          <FoodModal
+            foodModal={foodModal}
+            cancelModal={this.cancelFoodModal}
+            fetchData={this.fetchCategory}
+          />
+        )}
       </div>
     );
   }

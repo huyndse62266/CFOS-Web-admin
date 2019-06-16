@@ -10,10 +10,15 @@ class CategoryFCModal extends Component {
         try {
           const { categoryModal } = this.props;
           if (categoryModal.mode === MODE.ADD) {
-            await createCategoryFc({ ...values, categoryVM: [], active: true });
+            await createCategoryFc({ ...values, active: true });
             message.success('create success');
           } else {
-            await updateCategoryFc({ ...categoryModal.item, ...values });
+            console.log('edit', { ...categoryModal.item, ...values }, values);
+            // await updateCategoryFc({ ...categoryModal.item, ...values });
+            await updateCategoryFc({
+              ...values,
+              categoryId: categoryModal.item.fcCategoryId
+            });
             message.success('update success');
           }
           this.props.cancelModal();

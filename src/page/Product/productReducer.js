@@ -2,31 +2,20 @@ import * as constants from '../../utils/constants/actionType';
 
 const initialState = {
   isLoading: false,
-  account: {},
-  role: ''
+  foodList: []
 };
 
-const system = (state = initialState, action) => {
+const product = (state = initialState, action) => {
   switch (action.type) {
     case constants.PENDING:
       return {
         ...state,
         isLoading: true
       };
-    case constants.FETCH_ACCOUNT_INFO + constants.SUCCESS:
+    case constants.FETCH_FOOD_PRODUCT + constants.SUCCESS:
       return {
         ...state,
-        account: action.payload
-      };
-    case constants.UPDATE_ROLE:
-      return {
-        ...state,
-        role: action.payload
-      };
-    case constants.SIGN_OUT:
-      return {
-        ...initialState,
-        isLoading: false
+        foodList: action.payload
       };
     case constants.ERROR:
       return {
@@ -42,4 +31,4 @@ const system = (state = initialState, action) => {
   }
 };
 
-export default system;
+export default product;

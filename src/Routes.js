@@ -43,7 +43,7 @@ const Routes = ({ location, role }) => {
   };
   return (
     <Switch>
-      <Redirect exact from="/" to={checkRole()} />
+      <Redirect exact from="#/" to={checkRole()} />
       <Route
         exact
         path={RouteMap.ROUTE_DASHBOARD}

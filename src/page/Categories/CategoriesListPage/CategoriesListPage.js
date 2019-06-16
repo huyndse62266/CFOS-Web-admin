@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Icon, Button } from 'antd';
+import { Collapse, Icon, Button, Tooltip } from 'antd';
 import './CategoryFC.scss';
 import { getCategoryFc } from './CategoryService';
 import { isEmpty } from '../../../utils/helpers/helpers';
@@ -60,7 +60,6 @@ class CategoriesListPage extends Component {
 
   render() {
     const { listCategoryFC, categoryModal, subCategoryModal } = this.state;
-    console.log('test', subCategoryModal);
     return (
       <div className="category-container">
         <div className="col-lg-10">
@@ -87,21 +86,25 @@ class CategoriesListPage extends Component {
                       className="panel-item"
                       extra={
                         <span>
-                          <Icon
-                            type="plus-circle"
-                            onClick={e => {
-                              this.createSubCategoryModal(el);
-                              e.stopPropagation();
-                            }}
-                          />
-                          &nbsp;
-                          <Icon
-                            type="edit"
-                            onClick={e => {
-                              this.editCategoryModal(el);
-                              e.stopPropagation();
-                            }}
-                          />
+                          <Tooltip title="Create category">
+                            <Icon
+                              type="plus-circle"
+                              onClick={e => {
+                                this.createSubCategoryModal(el);
+                                e.stopPropagation();
+                              }}
+                            />
+                          </Tooltip>
+                          &nbsp; &nbsp;&nbsp;
+                          <Tooltip title="Edit">
+                            <Icon
+                              type="edit"
+                              onClick={e => {
+                                this.editCategoryModal(el);
+                                e.stopPropagation();
+                              }}
+                            />
+                          </Tooltip>
                         </span>
                       }
                     >
@@ -109,13 +112,15 @@ class CategoriesListPage extends Component {
                         el.categoryVM.map(item => (
                           <div className="sub-cate-item" key={item.categoryId}>
                             <p className="text-item">{item.categoryName}</p>
-                            <Icon
-                              type="edit"
-                              onClick={e => {
-                                this.editSubCategoryModal(item, el);
-                                e.stopPropagation();
-                              }}
-                            />
+                            <Tooltip title="Edit sub category">
+                              <Icon
+                                type="edit"
+                                onClick={e => {
+                                  this.editSubCategoryModal(item, el);
+                                  e.stopPropagation();
+                                }}
+                              />
+                            </Tooltip>
                           </div>
                         ))}
                     </Panel>

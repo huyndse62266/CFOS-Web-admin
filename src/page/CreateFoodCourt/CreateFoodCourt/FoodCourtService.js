@@ -16,7 +16,7 @@ export const getListUser = param => {
 export const getListFoodCourt = () => {
   return api({
     method: 'get',
-    url: '/api/all/food-courts'
+    url: '/api/foodcourt/all'
   });
 };
 export const createFoodCourt = data => {

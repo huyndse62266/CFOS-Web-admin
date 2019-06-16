@@ -3,7 +3,7 @@ import { Form, Button, Icon, Input } from 'antd';
 import Cookie from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 import { connect } from 'react-redux';
-import { TOKEN, EXPIRED_TIME } from '../../utils/constants/constants';
+import { TOKEN } from '../../utils/constants/constants';
 import { ROLES } from '../../utils/constants/constants';
 import * as routes from '../../utils/constants/route';
 import { requestLogin } from './LoginService';
