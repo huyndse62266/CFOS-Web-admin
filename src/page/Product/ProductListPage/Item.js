@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon } from 'antd';
+import { Table, Icon,Tooltip } from 'antd';
 import { actionGetListFoodByCate } from '../productAction';
 import { isEmpty } from '../../../utils/helpers/helpers';
 
@@ -61,7 +61,9 @@ class Item extends Component {
         title: 'Action',
         dataIndex: 'action',
         render: (text, record) => (
+          <Tooltip title="Chỉnh Sửa Món Ăn">
           <Icon type="edit" onClick={e => this.openEdit(e, record)} />
+          </Tooltip>
         ),
         key: 'action'
       }

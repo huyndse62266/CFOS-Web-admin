@@ -38,7 +38,7 @@ class ProfileModal extends Component {
     const { profile } = this.state;
     return (
       <Modal
-        title="Tạo Mới Account"
+        title="Thông Tin Tài Khoản"
         centered
         width={960}
         visible={visible}

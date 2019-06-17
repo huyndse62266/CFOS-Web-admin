@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Icon, Button } from 'antd';
+import { Collapse, Icon, Button,Tooltip } from 'antd';
 import './CateFood.scss';
 import { getListCategoryStore } from './CateFoodService';
 import { isEmpty } from '../../../utils/helpers/helpers';
@@ -81,14 +81,18 @@ class ProductListPage extends Component {
                       className="panel-item"
                       extra={
                         <span>
-                          <Icon
+                           <Tooltip title="Tạo Món Ăn Mới">
+                           <Icon
                             type="plus-circle"
                             onClick={e => {
                               this.createFoodModal(el);
                               e.stopPropagation();
                             }}
                           />
-                          &nbsp;
+                           </Tooltip>
+                        
+                          &nbsp;&nbsp;&nbsp;
+                          <Tooltip title="Chỉnh Sửa Danh Mục">
                           <Icon
                             type="edit"
                             onClick={e => {
@@ -96,6 +100,7 @@ class ProductListPage extends Component {
                               e.stopPropagation();
                             }}
                           />
+                            </Tooltip>
                         </span>
                       }
                     >

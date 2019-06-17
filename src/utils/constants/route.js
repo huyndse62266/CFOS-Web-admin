@@ -14,6 +14,7 @@ export const ROUTE_MANAGE_FOODCOURT = '/foodcourt';
 export const ROUTE_MANAGE_CATEGORY_STORE = '/categoy-store';
 export const ROUTE_ORDER = '/order';
 export const ROUTE_STAFF = '/staff';
+export const ROUTE_CHEF = '/chef';
 export const ROUTE_CATEGORIES = '/categories';
 export const ROUTE_MEMBER = '/member';
 export const ROUTE_TRANSACTION = '/transaction';

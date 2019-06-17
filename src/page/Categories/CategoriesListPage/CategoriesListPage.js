@@ -65,9 +65,9 @@ class CategoriesListPage extends Component {
         <div className="col-lg-10">
           <div className="card">
             <div className="header-wrapper">
-              <p className="header-page">Category Foodcourt</p>
+              <p className="header-page">Danh Mục Foodcourt</p>
               <Button type="primary" onClick={this.createCategoryModal}>
-                Create Category
+                Tạo Mới Danh Mục
               </Button>
             </div>
 
@@ -86,7 +86,7 @@ class CategoriesListPage extends Component {
                       className="panel-item"
                       extra={
                         <span>
-                          <Tooltip title="Create category">
+                          <Tooltip title="Tạo Danh Mục Nhỏ">
                             <Icon
                               type="plus-circle"
                               onClick={e => {
@@ -96,7 +96,7 @@ class CategoriesListPage extends Component {
                             />
                           </Tooltip>
                           &nbsp; &nbsp;&nbsp;
-                          <Tooltip title="Edit">
+                          <Tooltip title="Chỉnh Sửa Danh Mục">
                             <Icon
                               type="edit"
                               onClick={e => {
@@ -112,7 +112,7 @@ class CategoriesListPage extends Component {
                         el.categoryVM.map(item => (
                           <div className="sub-cate-item" key={item.categoryId}>
                             <p className="text-item">{item.categoryName}</p>
-                            <Tooltip title="Edit sub category">
+                            <Tooltip title="Chỉnh Sửa Danh Mục Con">
                               <Icon
                                 type="edit"
                                 onClick={e => {

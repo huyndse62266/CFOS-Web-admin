@@ -88,7 +88,7 @@ class CategoryStorePage extends Component {
             className="create-btn"
             onClick={this.openModal}
           >
-            Tạo Mới Account
+            Tạo Mới Danh Mục
           </Button>
         </div>
         <div className="card-body">

@@ -30,6 +30,7 @@ class Login extends Component {
     if (role === ROLES.FOOD_COURT_MANAGER || role === ROLES.STORE_MANAGER)
       return routes.ROUTE_DASHBOARD;
     if (role === ROLES.CASHIER) return routes.ROUTE_MEMBER;
+    if (role === ROLES.CHEF) return routes.ROUTE_CHEF;
     return routes.ROUTE_LOGIN;
   };
   handleSubmit = e => {

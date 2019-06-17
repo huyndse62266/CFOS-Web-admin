@@ -35,9 +35,9 @@ class ChangePasswordModal extends Component {
     const { profile, isConfirm } = this.state;
     return (
       <Modal
-        title="Tạo Mới Account"
+        title="Thay Đổi Password"
         centered
-        width={960}
+        
         visible={visible}
         onOk={this.handleSubmit}
         onCancel={() => this.props.cancelModal()}

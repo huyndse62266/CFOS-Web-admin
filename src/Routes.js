@@ -19,7 +19,7 @@ import CancelOderPage from './page/CancelOrder/CancelOderPage/CancelOderPage';
 import CreateFoodCourt from './page/CreateFoodCourt/CreateFoodCourt/CreateFoodCourt';
 import ManageFoodCourt from './page/MangeFoodCourt/MangeFoodCourt/ManageFCPage';
 import CatagoryStore from './page/CategoryStore/CategoryStore/CategoryStorePage';
-
+import ViewAllOrderPage from './page/Chef/ViewAllOrder/ViewAllOrderPage';
 const Logout = () => {
   cookie.remove(Constants.TOKEN);
   return <Redirect to={RouteMap.ROUTE_LOGIN} />;
@@ -82,6 +82,7 @@ const Routes = ({ location, role }) => {
       />
       ;
       <Route exact path={RouteMap.ROUTE_MEMBER} component={MemberListPage} />;
+      <Route exact path={RouteMap.ROUTE_CHEF} component={ViewAllOrderPage} />;
       <Route
         exact
         path={RouteMap.ROUTE_TRANSACTION}
