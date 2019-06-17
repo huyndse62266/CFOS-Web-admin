@@ -24,3 +24,10 @@ export const getAccountInfo = () => {
     url: '/api/account'
   });
 };
+export const ForgotPassword = data => {
+  return api({
+    method: 'put',
+    url: '/api/forgot-password',
+    data
+  });
+};

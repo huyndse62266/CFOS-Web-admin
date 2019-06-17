@@ -8,18 +8,24 @@ import { ROLES } from '../../utils/constants/constants';
 import * as routes from '../../utils/constants/route';
 import { requestLogin } from './LoginService';
 import { updateRole } from '../system/systemAction';
+import ForgotPasswordModal from './ForgotPasswordModal';
 import './Login.scss';
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loading: false
+      loading: false,
+      visibleModal: false
     };
     // if (Cookie.get(TOKEN)) {
     //   window.history.back();
     // }
   }
+
+  openModal = () => this.setState({ visibleModal: true });
+  handleCancelForgotPass = () => this.setState({ visibleModal: false });
+
   decode = token => {
     const decoded = jwt_decode(token);
     return decoded.JWTAuthoritiesKey;
@@ -73,7 +79,7 @@ class Login extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const { loading } = this.state;
+    const { loading, visibleModal } = this.state;
     // if (Cookie.get(TOKEN)) {
     //   return null;
     // }
@@ -133,9 +139,14 @@ class Login extends Component {
                         <hr />
 
                         <div className="text-center">
-                          <a className="small" href="forgot-password.html">
+                          <p
+                            className="small"
+                            style={{ color: 'blue', cursor: 'pointer' }}
+                            type="primary"
+                            onClick={this.openModal}
+                          >
                             Forgot Password?
-                          </a>
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -145,6 +156,12 @@ class Login extends Component {
             </div>
           </div>
         </div>
+        {visibleModal && (
+          <ForgotPasswordModal
+            visible={visibleModal}
+            cancelModal={this.handleCancelForgotPass}
+          />
+        )}
       </div>
     );
   }
