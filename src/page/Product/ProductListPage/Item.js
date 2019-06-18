@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Table, Icon,Tooltip } from 'antd';
+import { Table, Icon, Tooltip } from 'antd';
 import { actionGetListFoodByCate } from '../productAction';
 import { isEmpty } from '../../../utils/helpers/helpers';
 
@@ -24,9 +24,19 @@ class Item extends Component {
         dataIndex: 'foodName',
         key: 'foodName'
       },
+      // {
+      //   title: 'Ảnh',
+      //   dataIndex: 'foodImage',
+      //   key: 'foodImage'
+      // },
       {
         title: 'Ảnh',
         dataIndex: 'foodImage',
+        render: (text, record) => (
+          <div>
+            <img className="image" src={record.foodImage} />
+          </div>
+        ),
         key: 'foodImage'
       },
       {
@@ -62,7 +72,7 @@ class Item extends Component {
         dataIndex: 'action',
         render: (text, record) => (
           <Tooltip title="Chỉnh Sửa Món Ăn">
-          <Icon type="edit" onClick={e => this.openEdit(e, record)} />
+            <Icon type="edit" onClick={e => this.openEdit(e, record)} />
           </Tooltip>
         ),
         key: 'action'

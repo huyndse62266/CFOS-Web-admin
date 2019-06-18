@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Icon, Button,Tooltip } from 'antd';
+import { Collapse, Icon, Button, Tooltip } from 'antd';
 import './CateFood.scss';
 import { getListCategoryStore } from './CateFoodService';
 import { isEmpty } from '../../../utils/helpers/helpers';
@@ -68,7 +68,9 @@ class ProductListPage extends Component {
 
             <div className="card-body">
               <Collapse
+                accordion
                 bordered={false}
+                destroyInactivePanel={true}
                 expandIcon={({ isActive }) => (
                   <Icon type="caret-right" rotate={isActive ? 90 : 0} />
                 )}
@@ -81,26 +83,25 @@ class ProductListPage extends Component {
                       className="panel-item"
                       extra={
                         <span>
-                           <Tooltip title="Tạo Món Ăn Mới">
-                           <Icon
-                            type="plus-circle"
-                            onClick={e => {
-                              this.createFoodModal(el);
-                              e.stopPropagation();
-                            }}
-                          />
-                           </Tooltip>
-                        
+                          <Tooltip title="Tạo Món Ăn Mới">
+                            <Icon
+                              type="plus-circle"
+                              onClick={e => {
+                                this.createFoodModal(el);
+                                e.stopPropagation();
+                              }}
+                            />
+                          </Tooltip>
                           &nbsp;&nbsp;&nbsp;
                           <Tooltip title="Chỉnh Sửa Danh Mục">
-                          <Icon
-                            type="edit"
-                            onClick={e => {
-                              this.editCategoryModal(el);
-                              e.stopPropagation();
-                            }}
-                          />
-                            </Tooltip>
+                            <Icon
+                              type="edit"
+                              onClick={e => {
+                                this.editCategoryModal(el);
+                                e.stopPropagation();
+                              }}
+                            />
+                          </Tooltip>
                         </span>
                       }
                     >

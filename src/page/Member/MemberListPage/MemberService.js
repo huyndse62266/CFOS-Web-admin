@@ -6,11 +6,12 @@ export const createMember = data => {
     data
   });
 };
-export const deposit = data => {
+export const deposit = (data, params) => {
   return api({
     method: 'post',
     url: '/api/deposit',
-    data
+    data,
+    params
   });
 };
 export const getListMember = param => {

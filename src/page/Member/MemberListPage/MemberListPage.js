@@ -8,21 +8,20 @@ import { isEmpty } from '../../../utils/helpers/helpers';
 class MemberListPage extends Component {
   state = {
     visibleModal: false,
-    depositModal: { visibleDepositMember: false, item: {} },
+    visibleDepositMember: false,
+    itemSelected: {},
     memberList: {}
   };
   // Create Member
   openModal = () => this.setState({ visibleModal: true });
   handleCancel = () => this.setState({ visibleModal: false });
   // Deposit
-  callDepositModal = () => {
-    const temp = { visibleDepositMember: true, item: {} };
-    this.setState({ depositModal: temp });
-  }
+  callDepositModal = item => {
+    this.setState({ visibleDepositMember: true, itemSelected: item });
+  };
   handleCancelDepositModal = () => {
-    const temp = { visibleDepositMember: false, item: {} };
-    this.setState({ depositModal: temp });
-  }
+    this.setState({ visibleDepositMember: false, itemSelected: {} });
+  };
 
   componentDidMount() {
     this.fetchUser();
@@ -51,9 +50,9 @@ class MemberListPage extends Component {
         try {
           await updateStatusUser({ ...item, active: !item.active });
           this.fetchUser();
-        } catch (err) { }
+        } catch (err) {}
       },
-      onCancel() { }
+      onCancel() {}
     });
   };
   handleSearch = async value => {
@@ -68,7 +67,12 @@ class MemberListPage extends Component {
     this.fetchUser({ page: page - 1 });
   };
   render() {
-    const { visibleModal, memberList, depositModal } = this.state;
+    const {
+      visibleModal,
+      memberList,
+      visibleDepositMember,
+      itemSelected
+    } = this.state;
     const columns = [
       {
         title: 'STT',
@@ -124,8 +128,8 @@ class MemberListPage extends Component {
             {record.active ? (
               <span style={{ color: '#1890ff' }}>active</span>
             ) : (
-                <span style={{ color: 'red' }}>inative</span>
-              )}
+              <span style={{ color: 'red' }}>inative</span>
+            )}
           </span>
         ),
         align: 'center',
@@ -143,20 +147,19 @@ class MemberListPage extends Component {
                 onClick={() => this.handleUpdate(record)}
               />
             </Tooltip>
-            &nbsp;
-            {/* {!isEmpty(memberList) && memberList.map(el => ( */}
-              <Tooltip title="Nộp Tiền">
-                <Icon
-                  type="dollar"
-                  className="deposit-icon"
-                  onClick={e => {
-                    this.callDepositModal(el)
-                    e.stopPropagation();
-                  }}
-                />
-              </Tooltip>
+            &nbsp; &nbsp;
+            {/* {!isEmpty(memberList) &&
+              memberList.content.map(el => ( */}
+            <Tooltip title="Nộp Tiền">
+              <Icon
+                type="dollar"
+                className="deposit-icon"
+                onClick={e => {
+                  this.callDepositModal(record);
+                }}
+              />
+            </Tooltip>
             {/* ))} */}
-
           </div>
         ),
         align: 'center',
@@ -205,9 +208,10 @@ class MemberListPage extends Component {
             fetchData={this.fetchUser}
           />
         )}
-        {depositModal.visibleDepositMember && (
+        {visibleDepositMember && (
           <DepositModal
-            depositModal={depositModal}
+            visible={visibleDepositMember}
+            itemSelected={itemSelected}
             cancelDepositModal={this.handleCancelDepositModal}
           />
         )}
