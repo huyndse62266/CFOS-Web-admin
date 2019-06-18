@@ -6,6 +6,13 @@ export const createMember = data => {
     data
   });
 };
+export const deposit = data => {
+  return api({
+    method: 'post',
+    url: '/api/deposit',
+    data
+  });
+};
 export const getListMember = param => {
   return api({
     method: 'get',

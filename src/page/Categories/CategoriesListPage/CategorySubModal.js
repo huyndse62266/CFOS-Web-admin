@@ -36,8 +36,8 @@ class CategorySubModal extends Component {
     console.log('sub cate', subCategoryModal);
     const titleModal =
       subCategoryModal.mode === MODE.ADD
-        ? 'Tao moi subcategory'
-        : 'Update subcategory';
+        ? 'Tạo Mới Danh Mục Con'
+        : 'Chỉnh Sửa Danh Mục Con';
     return (
       <Modal
         title={titleModal}

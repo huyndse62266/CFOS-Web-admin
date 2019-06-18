@@ -22,8 +22,6 @@ class FoodModal extends Component {
       if (!err) {
         try {
           const { foodModal } = this.props;
-          console.log('food modal', foodModal, values);
-          console.log('data', { ...foodModal.item, ...values });
           if (foodModal.mode === MODE.ADD) {
             delete values.fcCategoryId;
             await createFood({

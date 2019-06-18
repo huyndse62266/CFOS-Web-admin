@@ -93,7 +93,7 @@ class StoreListPage extends Component {
             className="create-btn"
             onClick={this.openModal}
           >
-            Tạo Mới Account
+            Tạo Mới Cửa Hàng
           </Button>
         </div>
         <div className="card-body">
