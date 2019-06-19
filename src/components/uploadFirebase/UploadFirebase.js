@@ -1,66 +1,45 @@
 import React, { Component } from 'react';
+import { Upload, Icon } from 'antd';
 import { storage } from '../../firebaseConfig';
 class UploadFirebase extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      image: null,
-      url: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleUpload = this.handleUpload.bind(this);
-  }
-  handleChange = e => {
-    if (e.target.files[0]) {
-      const image = e.target.files[0];
-      this.setState({ image });
-    }
-  };
-  handleUpload = () => {
-    const { image } = this.state;
-    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+  uploadFireBase = file => {
+    const uploadTask = storage.ref(`images/${file.name}`).put(file);
     uploadTask.on(
       'state_changed',
-      snapshot => {
-        // progres funtion
-      },
-      error => {
-        //error funtion
-        console.log(error);
-      },
+      snapshot => {},
+      error => {},
       () => {
         // complete funtion
         storage
           .ref('images')
-          .child(image.name)
+          .child(file.name)
           .getDownloadURL()
           .then(url => {
-            console.log(url);
-            this.setState({ url });
+            this.props.handleChangeUpload(url);
           });
       }
     );
   };
   render() {
-    const style = {
-      height: '100vh',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center'
-    };
+    const { imageUrl } = this.props;
     return (
-      <div style={{ style }}>
-        <input type="file" onChange={this.handleChange} />
-        <button onClick={this.handleUpload}>Upload</button>
-        <br />
-        <img
-          src={this.state.url || 'https://via.placeholder.com/350x150'}
-          alt="Uploaded images"
-          height="300"
-          width="400"
-        />
-      </div>
+      <Upload
+        name="avatar"
+        listType="picture-card"
+        className="avatar-uploader"
+        showUploadList={false}
+        action={this.uploadFireBase}
+        onChange={this.uploadChange}
+      >
+        {imageUrl ? (
+          <img src={imageUrl} alt="avatar" style={{ width: 104 }} />
+        ) : (
+          <div>
+            <Icon type="plus" />
+            <div className="ant-upload-text">Upload</div>
+          </div>
+        )}
+      </Upload>
     );
   }
 }

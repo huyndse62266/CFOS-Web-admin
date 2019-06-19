@@ -5,32 +5,46 @@ import { actionGetListFoodByCate } from '../productAction';
 import { getCategoryFc, createFood, updateFood } from './CateFoodService';
 import { isEmpty } from '../../../utils/helpers/helpers';
 import { MODE } from '../../../utils/constants/constants';
+import UploadFirebase from '../../../components/uploadFirebase/UploadFirebase';
 class FoodModal extends Component {
-  state = {
-    cateFCList: [],
-    subCate: []
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      cateFCList: [],
+      subCate: [],
+      urlImage: props.foodModal.item.foodImage || ''
+    };
+  }
 
   // async để call api, await hoạt động
   async componentDidMount() {
     const res = await getCategoryFc();
     this.setState({ cateFCList: res.data, subCate: res.data.categoryVM || [] });
   }
+  handleChangeUpload = url => {
+    this.setState({ urlImage: url });
+  };
 
   handleSubmit = e => {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         try {
           const { foodModal } = this.props;
+          const { urlImage } = this.state;
           if (foodModal.mode === MODE.ADD) {
             delete values.fcCategoryId;
             await createFood({
               ...values,
+              foodImage: urlImage,
               storeCategoryId: foodModal.parent.categoryId
             });
             message.success('create success');
           } else {
-            await updateFood({ ...foodModal.item, ...values });
+            await updateFood({
+              ...foodModal.item,
+              ...values,
+              foodImage: urlImage
+            });
             message.success('update success');
           }
           this.props.cancelModal();
@@ -48,7 +62,8 @@ class FoodModal extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { foodModal } = this.props;
-    const { cateFCList, subCate } = this.state;
+    const { cateFCList, subCate, urlImage } = this.state;
+    console.log('abc', urlImage);
     const titleModal =
       foodModal.mode === MODE.ADD ? 'Tạo Mới Món Ăn' : 'Chỉnh Sửa Món Ăn';
     return (
@@ -63,19 +78,17 @@ class FoodModal extends Component {
         <Form>
           <div className="row">
             <div className="col-md-6">
-              <span className="lab-text">foodName</span>
+              <span className="lab-text">Tên Món Ăn</span>
               <Form.Item>
                 {getFieldDecorator('foodName', {
                   initialValue:
                     foodModal.mode === MODE.EDIT ? foodModal.item.foodName : '',
-                  rules: [
-                    { required: true, message: 'Please input your foodName!' }
-                  ]
+                  rules: [{ required: true, message: 'Nhập Tên Món Ăn!' }]
                 })(<Input placeholder="foodName" />)}
               </Form.Item>
             </div>
             <div className="col-md-6">
-              <span className="lab-text">foodDescription</span>
+              <span className="lab-text">Mô Tả</span>
               <Form.Item>
                 {getFieldDecorator('foodDescription', {
                   initialValue:
@@ -85,7 +98,7 @@ class FoodModal extends Component {
                   rules: [
                     {
                       required: true,
-                      message: 'Please input your foodDescription!'
+                      message: 'Nhập Mô Tả!'
                     }
                   ]
                 })(<Input placeholder="foodDescription" />)}
@@ -94,47 +107,44 @@ class FoodModal extends Component {
           </div>
           <div className="row">
             <div className="col-md-6">
-              <span className="lab-text">foodImage</span>
-              <Form.Item>
-                {getFieldDecorator('foodImage', {
-                  initialValue:
-                    foodModal.mode === MODE.EDIT
-                      ? foodModal.item.foodImage
-                      : '',
-                  rules: [{ required: true, message: 'hay nhap foodImage!' }]
-                })(<Input placeholder="foodImage" />)}
-              </Form.Item>
+              <span className="lab-text">Hình Ảnh</span>
+              <div>
+                <UploadFirebase
+                  handleChangeUpload={this.handleChangeUpload}
+                  imageUrl={urlImage}
+                />
+              </div>
             </div>
             <div className="col-md-6">
-              <span className="lab-text">foodUnit</span>
+              <span className="lab-text">Đơn Vị Món Ăn</span>
               <Form.Item>
                 {getFieldDecorator('foodUnit', {
                   initialValue:
                     foodModal.mode === MODE.EDIT ? foodModal.item.foodUnit : '',
-                  rules: [{ required: true, message: 'hay nhap foodUnit!' }]
+                  rules: [{ required: true, message: 'Nhập Đơn Vị' }]
                 })(<Input placeholder="foodUnit" />)}
               </Form.Item>
             </div>
           </div>
           <div className="row">
             <div className="col-md-6">
-              <span className="lab-text">price</span>
+              <span className="lab-text">Giá</span>
               <Form.Item>
                 {getFieldDecorator('price', {
                   initialValue:
                     foodModal.mode === MODE.EDIT ? foodModal.item.price : '',
-                  rules: [{ required: true, message: 'hay nhap price!' }]
-                })(<Input placeholder="price" />)}
+                  rules: [{ required: true, message: 'Nhập Giá!' }]
+                })(<Input type="number" placeholder="price" />)}
               </Form.Item>
             </div>
             <div className="col-md-6">
-              <span className="lab-text">quantity</span>
+              <span className="lab-text">Số Lượng</span>
               <Form.Item>
                 {getFieldDecorator('quantity', {
                   initialValue:
                     foodModal.mode === MODE.EDIT ? foodModal.item.quantity : '',
-                  rules: [{ required: true, message: 'hay nhap quantity!' }]
-                })(<Input placeholder="quantity" />)}
+                  rules: [{ required: true, message: 'Nhập Số Lượng' }]
+                })(<Input type="number" placeholder="quantity" />)}
               </Form.Item>
             </div>
           </div>
@@ -144,7 +154,7 @@ class FoodModal extends Component {
                 <span className="lab-text">Chọn Danh Mục Lớn</span>
                 <Form.Item>
                   {getFieldDecorator('fcCategoryId', {
-                    rules: [{ required: true, message: 'hay nhap Danh Mục!' }]
+                    rules: [{ required: true, message: 'Chọn Danh Mục!' }]
                   })(
                     <Select
                       style={{ width: '100%' }}
@@ -167,7 +177,7 @@ class FoodModal extends Component {
                 <span className="lab-text">Chọn Danh Mục Nhỏ</span>
                 <Form.Item>
                   {getFieldDecorator('fcSubCategoryId', {
-                    rules: [{ required: true, message: 'hay nhap Danh Mục!' }]
+                    rules: [{ required: true, message: 'Nhập Danh Mục Nhỏ!' }]
                   })(
                     <Select style={{ width: '100%' }}>
                       {!isEmpty(subCate) &&

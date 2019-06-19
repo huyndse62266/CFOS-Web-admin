@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Form, Button, Icon, Input } from 'antd';
+import md5 from 'md5';
 import Cookie from 'js-cookie';
 import jwt_decode from 'jwt-decode';
 import { connect } from 'react-redux';
@@ -45,7 +46,11 @@ class Login extends Component {
       if (!error) {
         this.setState({ loading: true });
         try {
-          const res = await requestLogin(values);
+          console.log('abc', md5('message'));
+          const res = await requestLogin({
+            ...values,
+            password: md5(values.password)
+          });
           const auth = res.headers.authorization.split(' ')[1];
           Cookie.set(TOKEN, auth);
           const role = this.decode(auth);
