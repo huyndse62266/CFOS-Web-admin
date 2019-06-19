@@ -70,7 +70,7 @@ class StoreListPage extends Component {
         title: 'Hành Động',
         dataIndex: 'action',
         render: (text, record) => (
-          <Tooltip title="Update">
+          <Tooltip title="Chỉnh Sửa Thông Tin Cửa Hàng">
             <Icon
               type="edit"
               className="edit-icon"

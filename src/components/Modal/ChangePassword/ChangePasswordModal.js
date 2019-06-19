@@ -69,7 +69,7 @@ class ChangePasswordModal extends Component {
               <span className="lab-text">Mật Khẩu mới</span>
               <Form.Item>
                 {getFieldDecorator('newPassword', {
-                  rules: [{ required: true, message: 'Nhập mật khẩu mới!' }]
+                  rules: [{ required: true, message: 'Nhập lại mật khẩu!' }]
                 })(<Input type="password" />)}
               </Form.Item>
             </div>

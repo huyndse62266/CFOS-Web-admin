@@ -17,10 +17,10 @@ class DepositModal extends Component {
     });
 
     Modal.confirm({
-      title: 'Do you Want to delete these items?',
+      title: 'Nhập Password Xác Thực !',
       content: (
         <div>
-          <p>password</p>
+          <p>Password</p>
           <Input onChange={e => (password = e.target.value.trim())} />
         </div>
       ),

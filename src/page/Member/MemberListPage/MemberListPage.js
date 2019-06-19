@@ -147,7 +147,7 @@ class MemberListPage extends Component {
                 onClick={() => this.handleUpdate(record)}
               />
             </Tooltip>
-            &nbsp; &nbsp;
+            &nbsp; 
             {/* {!isEmpty(memberList) &&
               memberList.content.map(el => ( */}
             <Tooltip title="Nộp Tiền">

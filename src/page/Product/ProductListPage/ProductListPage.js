@@ -85,6 +85,7 @@ class ProductListPage extends Component {
                         <span>
                           <Tooltip title="Tạo Món Ăn Mới">
                             <Icon
+                              style={{color:"blue"}}
                               type="plus-circle"
                               onClick={e => {
                                 this.createFoodModal(el);

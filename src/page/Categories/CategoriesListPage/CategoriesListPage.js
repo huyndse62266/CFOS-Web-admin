@@ -88,6 +88,7 @@ class CategoriesListPage extends Component {
                         <span>
                           <Tooltip title="Tạo Danh Mục Nhỏ">
                             <Icon
+                              style={{color:"blue"}}
                               type="plus-circle"
                               onClick={e => {
                                 this.createSubCategoryModal(el);

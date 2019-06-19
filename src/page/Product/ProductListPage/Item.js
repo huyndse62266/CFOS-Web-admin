@@ -37,27 +37,31 @@ class Item extends Component {
             <img className="image" src={record.foodImage} />
           </div>
         ),
-        key: 'foodImage'
+        key: 'foodImage',
+        align: 'center'
       },
       {
         title: 'Mô tả',
         dataIndex: 'foodDescription',
-        key: 'foodDescription'
+        key: 'foodDescription'     
       },
       {
         title: 'Đơn vị',
         dataIndex: 'foodUnit',
-        key: 'foodUnit'
+        key: 'foodUnit',
+        align: 'center'
       },
       {
         title: 'Giá',
         dataIndex: 'price',
-        key: 'price'
+        key: 'price',
+        align: 'center'
       },
       {
         title: 'Số Lượng',
         dataIndex: 'quantity',
-        key: 'quantity'
+        key: 'quantity',
+        align: 'center'
       },
       {
         title: 'Status',
@@ -65,7 +69,8 @@ class Item extends Component {
         render: (text, record) => (
           <span>{record.active ? 'active' : 'inactive'}</span>
         ),
-        key: 'active'
+        key: 'active',
+        align: 'center'
       },
       {
         title: 'Action',
@@ -75,7 +80,8 @@ class Item extends Component {
             <Icon type="edit" onClick={e => this.openEdit(e, record)} />
           </Tooltip>
         ),
-        key: 'action'
+        key: 'action',
+        align: 'center'
       }
     ];
 
